@@ -14,7 +14,7 @@ class NewContentWidget extends StatelessWidget {
       onTap: press,
       child: Container(
         width: size.width * 0.88,
-        height: size.height * 0.15,
+        height: isPhone(context) ?size.height * 0.12 :size.height * 0.15,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [kContentColor2, kContentColor2],
@@ -43,7 +43,7 @@ class NewContentWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       //color: Colors.white,
-                      fontSize: isPhone(context) ? 25 : 35,
+                      fontSize: isPhone(context) ? 23 : 35,
                       fontWeight: FontWeight.w500,
                       foreground: Paint()
                         ..style = PaintingStyle.stroke
@@ -63,7 +63,7 @@ class NewContentWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       //color: Colors.white,
-                      fontSize: isPhone(context) ? 25 : 35,
+                      fontSize: isPhone(context) ? 23 : 35,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
                       shadows: [

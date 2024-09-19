@@ -43,6 +43,10 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
     readProvincesJson();
+    setState(() {
+      final dateToday = DateTime.now();
+      age.text = DateFormat('dd/MM/yyyy').format(dateToday);
+    });
   }
 
   void _increment() {

@@ -36,7 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   dropdown_button2: ^2.3.9
-  # flutter_native_splash: ^2.4.1
+  flutter_native_splash: ^2.4.1
   collection: ^1.18.0  
   ff_navigation_bar_plus: ^0.1.5
   motion_tab_bar_v2: ^0.3.0
@@ -61,19 +61,19 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
 
-# flutter_native_splash:
-#   color: "#ffffff"
-#   image: assets/images/images.png
-#   android: true
-#   ios: true
-#   web: false
-#   fullscreen: true
-#   android_gravity: fill
-#   android_12:
-#     image: assets/images/images.png
-#     color: "#FFFFFF"
-#     fullscreen: true
-#     android_gravity: fill
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/images.png
+  android: true
+  ios: true
+  web: false
+  fullscreen: false
+  android_gravity: center
+  android_12:
+    image: assets/images/images.png
+    color: "#FFFFFF"
+    fullscreen: false
+    android_gravity: center
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

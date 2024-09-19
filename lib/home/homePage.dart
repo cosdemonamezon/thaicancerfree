@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
               ),
               isPhone(context)
                   ? Positioned(
-                      top: 107,
+                      top: 125,
                       right: 33,
                       child: Image.asset(
                         'assets/images/file.png',
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     fit: BoxFit.fill,
                   )),
               Positioned(
-                bottom: isPhone(context) ?295 :420,
+                bottom: isPhone(context) ?275 :420,
                 left: 30,
                 right: 30,
                 child: NewContentWidget(
@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Positioned(
-                bottom: isPhone(context) ?115 :150,
+                bottom: isPhone(context) ?126 :150,
                 left: 30,
                 right: 30,
                 child: NewContentWidget(

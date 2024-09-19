@@ -892,16 +892,6 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
             GestureDetector(
               onTap: () async {
                 if (isPhone(context)) {
-                  // final ok2 = await showDialog(
-                  //   context: context,
-                  //   barrierDismissible: false,
-                  //   builder: (context) => SuccessDialog(
-                  //     title: 'ท่านดำเนินการสำเร็จ โปรดรอการติดต่อกลับจาก รพ.',
-                  //     pressYes: () {
-                  //       Navigator.pop(context, true);
-                  //     },
-                  //   ),
-                  // );
                   // if (ok2 == true) {
                   //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
                   // }
@@ -923,12 +913,22 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
                       if (!mounted) return;
                       LoadingDialog.close(context);
                       if (_member != null) {
+                        // final ok2 = await showDialog(
+                        //   context: context,
+                        //   barrierDismissible: false,
+                        //   builder: (context) => SuccessDialog(
+                        //     title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                        //     pressYes: () {
+                        //       Navigator.pop(context, true);
+                        //     },
+                        //   ),
+                        // );
                         final ok2 = await showDialog(
                           context: context,
                           barrierDismissible: false,
-                          builder: (context) => SuccessDialog(
-                            title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
-                            pressYes: () {
+                          builder: (context) => NewScessDialog(
+                            title: 'ลงทะเบียนสำเร็จแล้ว',
+                            pressYes: () async {
                               Navigator.pop(context, true);
                             },
                           ),
