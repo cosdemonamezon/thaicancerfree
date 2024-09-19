@@ -22,8 +22,8 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
               topRight: Radius.circular(10),
             ),
             child: Container(
-              width: size.width * 0.65,
-              height: size.height * 0.45,
+              width: size.width * 0.69,
+              height: size.height * 0.36,
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border(
@@ -53,12 +53,54 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'ท่านมีสิทธ์ รับการตรวจคัดกรองมะเร็งเต้านม (แมมโมแกรม + อัลตราซาวน์เต้านม) ในบริการสร้างเสริมสุขภาพและการป้องกันโรคของสำนักงานหลักประกันสุขภาพแห่งชาติโดยท่านต้องเตรียมเอกสารดังนี้เมื่อเข้ารับบริการ',
+                          'ท่านมีสิทธ์รับการตรวจคัดกรองมะเร็งเต้านม',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: isPhone(context) ? 18 : 28.5,
+                            fontSize: isPhone(context) ? 18 : 23.3,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          '(แมมโมแกรม + อัลตราซาวน์เต้านม)',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: isPhone(context) ? 18 : 23.3,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          'ในบริการสร้างเสริมสุขภาพและการป้องกันโรค',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: isPhone(context) ? 18 : 23.3,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          'ของสำนักงานหลักประกันสุขภาพแห่งชาติ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: isPhone(context) ? 18 : 23.3,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          'โดยท่านต้องเตรียมเอกสารดังนี้เมื่อเข้ารับบริการ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: isPhone(context) ? 18 : 23.3,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'Prompt',
                           ),
@@ -82,7 +124,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                                   '1.',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: isPhone(context) ? 18 : 28,
+                                    fontSize: isPhone(context) ? 18 : 23.3,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'Prompt',
                                   ),
@@ -93,7 +135,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                                   'บัตรประจำตัวประชาชน',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: isPhone(context) ? 18 : 28,
+                                    fontSize: isPhone(context) ? 18 : 23.3,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'Prompt',
                                   ),
@@ -113,7 +155,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                                   '2.',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: isPhone(context) ? 18 : 28,
+                                    fontSize: isPhone(context) ? 18 : 23.3,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'Prompt',
                                   ),
@@ -124,7 +166,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                                   'ใบรับรองแพทย์ที่ระบุว่า ญาติสายตรงของท่านเป็นมะเร็งเต้านม',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: isPhone(context) ? 18 : 28,
+                                    fontSize: isPhone(context) ? 18 : 23.3,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'Prompt',
                                   ),
@@ -146,7 +188,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                 bottomRight: Radius.circular(10),
               ),
             ),
-            width: size.width * 0.65,
+            width: size.width * 0.69,
             height: size.height * 0.05,
             child: Row(
               children: [
@@ -194,7 +236,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                         ),
                         child: Center(
                             child: Text(
-                          'ตกลง',
+                          'รับทราบ',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: isPhone(context) ? 19.55 : 25.55,

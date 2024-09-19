@@ -47,7 +47,7 @@ class NewContentWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       foreground: Paint()
                         ..style = PaintingStyle.stroke
-                        ..strokeWidth = 1.8
+                        ..strokeWidth = 2.2
                         ..color = Colors.black,
                       // shadows: [
                       //   Shadow(

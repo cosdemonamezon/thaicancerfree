@@ -23,7 +23,7 @@ class RiskDialogTablet extends StatelessWidget {
             ),
             child: Container(
               width: size.width * 0.65,
-              height: size.height * 0.25,
+              height: size.height * 0.24,
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border(
@@ -51,14 +51,56 @@ class RiskDialogTablet extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.02),
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'แบบประเมินความเสี่ยงมะเร็งเต้านมชุดนี้เป็นการนำปัจจัยเสี่ยงต่างๆ จากหลักฐานทางวิชาการที่อาจส่งผลต่อการเป็นมะเร็งเต้านมมาจัดทำเป็นชุดคำถามเพื่อประเมินระดับความเสี่ยงเบื้องต้นเท่านั้น',
+                          'แบบประเมินความเสี่ยงมะเร็งเต้านมชุดนี้',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: isPhone(context) ? 19.55 : 27.6,
+                            fontSize: isPhone(context) ? 19.55 : 25.2,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          'เป็นการนำปัจจัยเสี่ยงต่างๆ จากหลักฐาน',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: isPhone(context) ? 19.55 : 25.2,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          'ทางวิชาการที่อาจส่งผลต่อการเป็น',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: isPhone(context) ? 19.55 : 25.2,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          'มะเร็งเต้านมมาจัดทำเป็นชุดคำถามเพื่อ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: isPhone(context) ? 19.55 : 25.2,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                        Text(
+                          'ประเมินระดับความเสี่ยงเบื้องต้นเท่านั้น',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: isPhone(context) ? 19.55 : 25.2,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'Prompt',
                           ),

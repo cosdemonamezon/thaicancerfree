@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thaicancerfree/constants.dart';
 import 'package:thaicancerfree/home/firstPage.dart';
 import 'package:thaicancerfree/home/services/homeApi.dart';
@@ -901,45 +902,101 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
                   try {
                     LoadingDialog.open(context);
                     if (selectedProvince != null && selectedDistrict != null && selectedHospitals != null) {
-                      final _member = await HomeApi.addMembers(
-                          fname: widget.fname,
-                          lname: widget.lname,
-                          idcard: widget.idcard,
-                          email: widget.email,
-                          phone: widget.phone,
-                          address: widget.address,
-                          khet_id: selectedDistrict!.id.toString(),
-                          province_id: selectedProvince!.id.toString(),
-                          hospital_id: selectedHospitals!.id.toString(),
-                          sex: widget.sex,
-                          birthday: widget.age);
-                      if (!mounted) return;
-                      LoadingDialog.close(context);
-                      if (_member != null) {
-                        // final ok2 = await showDialog(
-                        //   context: context,
-                        //   barrierDismissible: false,
-                        //   builder: (context) => SuccessDialog(
-                        //     title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
-                        //     pressYes: () {
-                        //       Navigator.pop(context, true);
-                        //     },
-                        //   ),
-                        // );
-                        final ok2 = await showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => NewScessDialog(
-                            title: 'ลงทะเบียนสำเร็จแล้ว',
-                            pressYes: () async {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                        if (ok2 == true) {
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                        }
-                      } else {}
+                      final SharedPreferences prefs = await SharedPreferences.getInstance();
+                      final code = prefs.getString('code');
+                      if (code != null) {
+                        final _member = await HomeApi.addMembers(
+                            fname: widget.fname,
+                            lname: widget.lname,
+                            idcard: widget.idcard,
+                            email: widget.email,
+                            phone: widget.phone,
+                            address: widget.address,
+                            khet_id: selectedDistrict!.id.toString(),
+                            province_id: selectedProvince!.id.toString(),
+                            hospital_id: selectedHospitals!.id.toString(),
+                            sex: widget.sex,
+                            birthday: widget.age,
+                            code: code);
+                        if (!mounted) return;
+                        LoadingDialog.close(context);
+                        if (_member != null) {
+                          // final ok2 = await showDialog(
+                          //   context: context,
+                          //   barrierDismissible: false,
+                          //   builder: (context) => SuccessDialog(
+                          //     title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                          //     pressYes: () {
+                          //       Navigator.pop(context, true);
+                          //     },
+                          //   ),
+                          // );
+                          final ok2 = await showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => NewScessDialog(
+                              title: 'ลงทะเบียนสำเร็จแล้ว',
+                              pressYes: () async {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          if (ok2 == true) {
+                            final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                            SharedPreferences prefs = await _prefs;
+                            prefs = await SharedPreferences.getInstance();
+                            //await prefs.clear();
+                            await prefs.remove('code');
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                          }
+                        } else {}
+                      } else {
+                        final _member = await HomeApi.addMembers(
+                            fname: widget.fname,
+                            lname: widget.lname,
+                            idcard: widget.idcard,
+                            email: widget.email,
+                            phone: widget.phone,
+                            address: widget.address,
+                            khet_id: selectedDistrict!.id.toString(),
+                            province_id: selectedProvince!.id.toString(),
+                            hospital_id: selectedHospitals!.id.toString(),
+                            sex: widget.sex,
+                            birthday: widget.age,
+                            code: "");
+                        if (!mounted) return;
+                        LoadingDialog.close(context);
+                        if (_member != null) {
+                          // final ok2 = await showDialog(
+                          //   context: context,
+                          //   barrierDismissible: false,
+                          //   builder: (context) => SuccessDialog(
+                          //     title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                          //     pressYes: () {
+                          //       Navigator.pop(context, true);
+                          //     },
+                          //   ),
+                          // );
+                          final ok2 = await showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => NewScessDialog(
+                              title: 'ลงทะเบียนสำเร็จแล้ว',
+                              pressYes: () async {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          if (ok2 == true) {
+                            final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                            SharedPreferences prefs = await _prefs;
+                            prefs = await SharedPreferences.getInstance();
+                            //await prefs.clear();
+                            await prefs.remove('code');
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                          }
+                        } else {}
+                      }
                     } else {
                       if (!mounted) return;
                       LoadingDialog.close(context);
@@ -986,45 +1043,101 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
                   try {
                     LoadingDialog.open(context);
                     if (selectedProvince != null && selectedDistrict != null && selectedHospitals != null) {
-                      final _member = await HomeApi.addMembers(
-                          fname: widget.fname,
-                          lname: widget.lname,
-                          idcard: widget.idcard,
-                          email: widget.email,
-                          phone: widget.phone,
-                          address: widget.address,
-                          khet_id: selectedDistrict!.id.toString(),
-                          province_id: selectedProvince!.id.toString(),
-                          hospital_id: selectedHospitals!.id.toString(),
-                          sex: widget.sex,
-                          birthday: widget.age);
-                      if (!mounted) return;
-                      LoadingDialog.close(context);
-                      // final ok2 = await showDialog(
-                      //   context: context,
-                      //   barrierDismissible: false,
-                      //   builder: (context) => NewScessDialog(
-                      //     title: 'ลงทะเบียนสำเร็จแล้ว',
-                      //     pressYes: () async {
-                      //       Navigator.pop(context, true);
-                      //     },
-                      //   ),
-                      // );
-                      if (_member != null) {
-                        final ok2 = await showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => NewScessDialog(
-                            title: 'ลงทะเบียนสำเร็จแล้ว',
-                            pressYes: () async {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                        if (ok2 == true) {
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                        }
-                      } else {}
+                      final SharedPreferences prefs = await SharedPreferences.getInstance();
+                      final code = prefs.getString('code');
+                      if (code != null) {
+                        final _member = await HomeApi.addMembers(
+                            fname: widget.fname,
+                            lname: widget.lname,
+                            idcard: widget.idcard,
+                            email: widget.email,
+                            phone: widget.phone,
+                            address: widget.address,
+                            khet_id: selectedDistrict!.id.toString(),
+                            province_id: selectedProvince!.id.toString(),
+                            hospital_id: selectedHospitals!.id.toString(),
+                            sex: widget.sex,
+                            birthday: widget.age,
+                            code: code);
+                        if (!mounted) return;
+                        LoadingDialog.close(context);
+                        // final ok2 = await showDialog(
+                        //   context: context,
+                        //   barrierDismissible: false,
+                        //   builder: (context) => NewScessDialog(
+                        //     title: 'ลงทะเบียนสำเร็จแล้ว',
+                        //     pressYes: () async {
+                        //       Navigator.pop(context, true);
+                        //     },
+                        //   ),
+                        // );
+                        if (_member != null) {
+                          final ok2 = await showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => NewScessDialog(
+                              title: 'ลงทะเบียนสำเร็จแล้ว',
+                              pressYes: () async {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          if (ok2 == true) {
+                            final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                            SharedPreferences prefs = await _prefs;
+                            prefs = await SharedPreferences.getInstance();
+                            //await prefs.clear();
+                            await prefs.remove('code');
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                          }
+                        } else {}
+                      } else {
+                        final _member = await HomeApi.addMembers(
+                            fname: widget.fname,
+                            lname: widget.lname,
+                            idcard: widget.idcard,
+                            email: widget.email,
+                            phone: widget.phone,
+                            address: widget.address,
+                            khet_id: selectedDistrict!.id.toString(),
+                            province_id: selectedProvince!.id.toString(),
+                            hospital_id: selectedHospitals!.id.toString(),
+                            sex: widget.sex,
+                            birthday: widget.age,
+                            code: "");
+                        if (!mounted) return;
+                        LoadingDialog.close(context);
+                        // final ok2 = await showDialog(
+                        //   context: context,
+                        //   barrierDismissible: false,
+                        //   builder: (context) => NewScessDialog(
+                        //     title: 'ลงทะเบียนสำเร็จแล้ว',
+                        //     pressYes: () async {
+                        //       Navigator.pop(context, true);
+                        //     },
+                        //   ),
+                        // );
+                        if (_member != null) {
+                          final ok2 = await showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => NewScessDialog(
+                              title: 'ลงทะเบียนสำเร็จแล้ว',
+                              pressYes: () async {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          if (ok2 == true) {
+                            final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                            SharedPreferences prefs = await _prefs;
+                            prefs = await SharedPreferences.getInstance();
+                            //await prefs.clear();
+                            await prefs.remove('code');
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                          }
+                        } else {}
+                      }
                     } else {
                       if (!mounted) return;
                       LoadingDialog.close(context);

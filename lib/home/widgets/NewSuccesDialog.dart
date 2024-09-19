@@ -80,7 +80,7 @@ class NewScessDialog extends StatelessWidget {
                         ),
                         SizedBox(height: isPhone(context) ? size.height * 0.02 :size.height * 0.05),
                         Text(
-                          'ลงทะเบียนสำเร็จแล้ว',
+                          '$title',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: isPhone(context) ? 22 : 33,

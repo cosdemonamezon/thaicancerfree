@@ -34,7 +34,6 @@ class _RegisterPageState extends State<RegisterPage> {
   int ageValue = 0;
 
   int groupValue = 1;
-  bool valid = true;
 
   // สร้างตัวแปรเพื่อเก็บวันที่ที่เลือก
   DateTime? selectedDate;
@@ -176,8 +175,8 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          //width: size.width,
-          //height: size.height,
+          // width: size.width,
+          // height: size.height,
           decoration: BoxDecoration(
             // image: DecorationImage(
             //   image: AssetImage("assets/images/332211.png"),
@@ -198,7 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     Container(
                       width: size.width * 0.98,
-                      height: size.height * 1.81,
+                      height: size.height * 1.64,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(
@@ -218,7 +217,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: size.height * 0.04,
+                              height: size.height * 0.02,
                             ),
                             Image.asset(
                               'assets/images/images.png',
@@ -642,6 +641,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               validator: (val) => val == '' || val == null || val.isEmpty ? 'กรุณากรอกที่อยู่' : null,
                             ),
                             SizedBox(height: size.height * 0.02),
+
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
                               child: Row(
@@ -713,147 +713,271 @@ class _RegisterPageState extends State<RegisterPage> {
                                       );
                                     })
                                 : SizedBox(),
+                            // provinces.isEmpty
+                            //     ? SizedBox()
+                            //     : Card(
+                            //         elevation: 5,
+                            //         shape: RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+                            //         ),
+                            //         child: Container(
+                            //           height: size.height * 0.09,
+                            //           width: size.width * 0.93,
+                            //           decoration: BoxDecoration(
+                            //             color: kBackgroundColor,
+                            //             borderRadius: BorderRadius.all(
+                            //               Radius.circular(8.0),
+                            //             ),
+                            //             boxShadow: [
+                            //               BoxShadow(
+                            //                 offset: Offset(0, 0),
+                            //                 blurRadius: 0,
+                            //                 spreadRadius: 0,
+                            //                 //color: Colors.black26,
+                            //               ),
+                            //             ],
+                            //           ),
+                            //           child: DropdownButtonHideUnderline(
+                            //             child: DropdownButton2<Provinces>(
+                            //               isExpanded: true,
+                            //               hint: Text(
+                            //                 'จังหวัด',
+                            //                 style: TextStyle(
+                            //                   fontSize: isPhone(context) ? 22 : 32,
+                            //                   color: Theme.of(context).hintColor,
+                            //                 ),
+                            //               ),
+                            //               items: provinces
+                            //                   .map((Provinces item) => DropdownMenuItem<Provinces>(
+                            //                         value: item,
+                            //                         child: Text(
+                            //                           item.name,
+                            //                           style: TextStyle(
+                            //                             fontSize: isPhone(context) ? 22 : 32,
+                            //                           ),
+                            //                         ),
+                            //                       ))
+                            //                   .toList(),
+                            //               value: selecteProvinces,
+                            //               onChanged: (Provinces? value) {
+                            //                 setState(() {
+                            //                   selecteProvinces = value;
+                            //                 });
+                            //               },
+                            //               iconStyleData: IconStyleData(
+                            //                 icon: Icon(
+                            //                   Icons.arrow_drop_down,
+                            //                   color: Colors.black45,
+                            //                 ),
+                            //                 iconSize: isPhone(context) ? 24 : 54,
+                            //               ),
+                            //               buttonStyleData: ButtonStyleData(
+                            //                 padding: EdgeInsets.symmetric(horizontal: isPhone(context) ? 16 : 26),
+                            //                 height: isPhone(context) ? 40 : 80,
+                            //                 width: isPhone(context) ? 140 : 180,
+                            //               ),
+                            //               menuItemStyleData: MenuItemStyleData(
+                            //                 height: isPhone(context) ? 40 : 80,
+                            //               ),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            // SizedBox(
+                            //   height: size.height * 0.04,
+                            // ),
+                            // GestureDetector(
+                            //   onTap: () async {
+                            //     if (_formKey.currentState!.validate()) {
+                            //       if (isPhone(context)) {
+                            //         Navigator.push(
+                            //             context,
+                            //             MaterialPageRoute(
+                            //                 builder: (context) => FemaleBreastCancer(
+                            //                       fname: fname.text,
+                            //                       lname: lname.text,
+                            //                       sex: sex.text,
+                            //                       address: address.text,
+                            //                       phone: phone.text,
+                            //                       age: age.text,
+                            //                       email: email.text,
+                            //                       idcard: idcard.text,
+                            //                       selecteProvinces: provin.text,
+                            //                     )));
+                            //         // try {
+                            //         //   LoadingDialog.open(context);
+                            //         //   final _member = await HomeApi.addMembers(fname: fname.text, lname: lname.text, idcard: idcard.text, email: email.text, phone: phone.text, address: address.text);
+                            //         //   if (!mounted) return;
+                            //         //   LoadingDialog.close(context);
+                            //         //   if (_member != null) {
+                            //         //     final ok2 = await showDialog(
+                            //         //       context: context,
+                            //         //       barrierDismissible: false,
+                            //         //       builder: (context) => SuccessDialog(
+                            //         //         title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                            //         //         pressYes: () {
+                            //         //           Navigator.pop(context, true);
+                            //         //         },
+                            //         //       ),
+                            //         //     );
+                            //         //     if (ok2 == true) {
+                            //         //       Navigator.push(context, MaterialPageRoute(builder: (context) => FemaleBreastCancer()));
+                            //         //     }
+                            //         //   } else {}
+                            //         // } on Exception catch (e) {
+                            //         //   if (!mounted) return;
+                            //         //   LoadingDialog.close(context);
+                            //         //   showDialog(
+                            //         //     context: context,
+                            //         //     barrierDismissible: false,
+                            //         //     builder: (context) => SuccessDialog(
+                            //         //       title: '${e}',
+                            //         //       pressYes: () {
+                            //         //         Navigator.pop(context, true);
+                            //         //       },
+                            //         //     ),
+                            //         //   );
+                            //         // }
+                            //       } else {
+                            //         Navigator.push(
+                            //             context,
+                            //             MaterialPageRoute(
+                            //                 builder: (context) => FemaleBreastCancer(
+                            //                       fname: fname.text,
+                            //                       lname: lname.text,
+                            //                       sex: sex.text,
+                            //                       address: address.text,
+                            //                       phone: phone.text,
+                            //                       age: age.text,
+                            //                       email: email.text,
+                            //                       idcard: idcard.text,
+                            //                       selecteProvinces: selecteProvinces!.name,
+                            //                     )));
+                            //         // try {
+                            //         //   LoadingDialog.open(context);
+                            //         //   final _member = await HomeApi.addMembers(fname: fname.text, lname: lname.text, idcard: idcard.text, email: email.text, phone: phone.text, address: address.text);
+                            //         //   if (!mounted) return;
+                            //         //   LoadingDialog.close(context);
+                            //         //   if (_member != null) {
+                            //         //     final ok2 = await showDialog(
+                            //         //       context: context,
+                            //         //       barrierDismissible: false,
+                            //         //       builder: (context) => SuccessDialogTablet(
+                            //         //         page: 1,
+                            //         //         title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                            //         //         pressYes: () {
+                            //         //           Navigator.pop(context, true);
+                            //         //         },
+                            //         //       ),
+                            //         //     );
+                            //         //     if (ok2 == true) {
+                            //         //       Navigator.push(context, MaterialPageRoute(builder: (context) => FemaleBreastCancer()));
+                            //         //     }
+                            //         //   } else {}
+                            //         // } on Exception catch (e) {
+                            //         //   if (!mounted) return;
+                            //         //   LoadingDialog.close(context);
+                            //         //   showDialog(
+                            //         //     context: context,
+                            //         //     barrierDismissible: false,
+                            //         //     builder: (context) => SuccessDialogTablet(
+                            //         //       page: 0,
+                            //         //       title: '${e}',
+                            //         //       pressYes: () {
+                            //         //         Navigator.pop(context, true);
+                            //         //       },
+                            //         //     ),
+                            //         //   );
+                            //         // }
+                            //       }
+                            //     }
+                            //   },
+                            //   child: Container(
+                            //     width: size.width * 0.90,
+                            //     height: size.height * 0.07,
+                            //     decoration: ShapeDecoration(
+                            //       shape: RoundedRectangleBorder(),
+                            //       color: Colors.transparent,
+                            //     ),
+                            //     child: Padding(
+                            //       padding: EdgeInsets.all(1),
+                            //       child: DecoratedBox(
+                            //         decoration: ShapeDecoration(
+                            //           shape: RoundedRectangleBorder(
+                            //             borderRadius: BorderRadius.circular(10),
+                            //           ),
+                            //           gradient: LinearGradient(
+                            //             colors: [
+                            //               kContentColor1,
+                            //               kContentColor2,
+                            //             ],
+                            //             begin: Alignment.topLeft,
+                            //             end: Alignment.bottomRight,
+                            //           ),
+                            //         ),
+                            //         child: Center(
+                            //           child: Text(
+                            //             'ถัดไป',
+                            //             style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 28, fontWeight: FontWeight.bold),
+                            //             textAlign: TextAlign.center,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   height: size.height * 0.02,
+                            // ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     Navigator.pop(context);
+                            //   },
+                            //   child: Container(
+                            //     width: size.width * 0.90,
+                            //     height: size.height * 0.07,
+                            //     decoration: ShapeDecoration(
+                            //       shape: RoundedRectangleBorder(),
+                            //       color: Colors.transparent,
+                            //     ),
+                            //     child: Padding(
+                            //       padding: EdgeInsets.all(1),
+                            //       child: DecoratedBox(
+                            //         decoration: ShapeDecoration(
+                            //           shape: RoundedRectangleBorder(
+                            //             borderRadius: BorderRadius.circular(10),
+                            //           ),
+                            //           gradient: LinearGradient(
+                            //             colors: [
+                            //               kButtonNoColor,
+                            //               kButtonNoColor,
+                            //             ],
+                            //             begin: Alignment.topLeft,
+                            //             end: Alignment.bottomRight,
+                            //           ),
+                            //         ),
+                            //         child: Center(
+                            //           child: Text(
+                            //             'กลับ',
+                            //             style: TextStyle(
+                            //               color: Colors.white,
+                            //               fontSize: isPhone(context) ? 18 : 28,
+                            //             ),
+                            //             textAlign: TextAlign.center,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                             SizedBox(
-                              height: size.height * 0.08,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: size.height * 0.02,
-                                ),
-                                GestureDetector(
-                                  onTap: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      setState(() {
-                                        valid = true;
-                                      });
-                                      if (isPhone(context)) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => FemaleBreastCancer(
-                                                      fname: fname.text,
-                                                      lname: lname.text,
-                                                      sex: sex.text,
-                                                      address: address.text,
-                                                      phone: phone.text,
-                                                      age: age.text,
-                                                      email: email.text,
-                                                      idcard: idcard.text,
-                                                      selecteProvinces: provin.text,
-                                                    )));
-                                      } else {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => FemaleBreastCancer(
-                                                      fname: fname.text,
-                                                      lname: lname.text,
-                                                      sex: sex.text,
-                                                      address: address.text,
-                                                      phone: phone.text,
-                                                      age: age.text,
-                                                      email: email.text,
-                                                      idcard: idcard.text,
-                                                      selecteProvinces: selecteProvinces!.name,
-                                                    )));
-                                      }
-                                    }else{
-                                      setState(() {
-                                        valid = false;
-                                      });
-                                    }
-                                  },
-                                  child: Container(
-                                    width: size.width * 0.90,
-                                    height: size.height * 0.07,
-                                    decoration: ShapeDecoration(
-                                      shape: RoundedRectangleBorder(),
-                                      color: Colors.transparent,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(1),
-                                      child: DecoratedBox(
-                                        decoration: ShapeDecoration(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              kContentColor1,
-                                              kContentColor2,
-                                            ],
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'ถัดไป',
-                                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 28, fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.02,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    width: size.width * 0.90,
-                                    height: size.height * 0.07,
-                                    decoration: ShapeDecoration(
-                                      shape: RoundedRectangleBorder(),
-                                      color: Colors.transparent,
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(1),
-                                      child: DecoratedBox(
-                                        decoration: ShapeDecoration(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              kButtonNoColor,
-                                              kButtonNoColor,
-                                            ],
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomRight,
-                                          ),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'กลับ',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: isPhone(context) ? 18 : 28,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.02,
-                                ),
-                              ],
+                              height: size.height * 0.02,
                             ),
                           ],
                         ),
                       ),
                     ),
-                   //SizedBox(height: size.height * 0.16),
+                    SizedBox(height: size.height * 0.16),
                   ],
                 ),
               ),
@@ -861,170 +985,240 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   height: size.height * 0.2,
-      //   decoration: BoxDecoration(
-      //     gradient: LinearGradient(
-      //       colors: [
-      //         kContentColor3,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         Colors.white,
-      //         kContentColor3,
-      //       ],
-      //       begin: Alignment.centerLeft,
-      //       end: Alignment.centerRight,
-      //     ),
-      //   ),
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     children: [
-      //       SizedBox(
-      //         height: size.height * 0.02,
-      //       ),
-      //       GestureDetector(
-      //         onTap: () async {
-      //           if (_formKey.currentState!.validate()) {
-      //             if (isPhone(context)) {
-      //               Navigator.push(
-      //                   context,
-      //                   MaterialPageRoute(
-      //                       builder: (context) => FemaleBreastCancer(
-      //                             fname: fname.text,
-      //                             lname: lname.text,
-      //                             sex: sex.text,
-      //                             address: address.text,
-      //                             phone: phone.text,
-      //                             age: age.text,
-      //                             email: email.text,
-      //                             idcard: idcard.text,
-      //                             selecteProvinces: provin.text,
-      //                           )));
-      //             } else {
-      //               Navigator.push(
-      //                   context,
-      //                   MaterialPageRoute(
-      //                       builder: (context) => FemaleBreastCancer(
-      //                             fname: fname.text,
-      //                             lname: lname.text,
-      //                             sex: sex.text,
-      //                             address: address.text,
-      //                             phone: phone.text,
-      //                             age: age.text,
-      //                             email: email.text,
-      //                             idcard: idcard.text,
-      //                             selecteProvinces: selecteProvinces!.name,
-      //                           )));
-      //             }
-      //           }
-      //         },
-      //         child: Container(
-      //           width: size.width * 0.90,
-      //           height: size.height * 0.07,
-      //           decoration: ShapeDecoration(
-      //             shape: RoundedRectangleBorder(),
-      //             color: Colors.transparent,
-      //           ),
-      //           child: Padding(
-      //             padding: EdgeInsets.all(1),
-      //             child: DecoratedBox(
-      //               decoration: ShapeDecoration(
-      //                 shape: RoundedRectangleBorder(
-      //                   borderRadius: BorderRadius.circular(10),
-      //                 ),
-      //                 gradient: LinearGradient(
-      //                   colors: [
-      //                     kContentColor1,
-      //                     kContentColor2,
-      //                   ],
-      //                   begin: Alignment.topLeft,
-      //                   end: Alignment.bottomRight,
-      //                 ),
-      //               ),
-      //               child: Center(
-      //                 child: Text(
-      //                   'ถัดไป',
-      //                   style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 28, fontWeight: FontWeight.bold),
-      //                   textAlign: TextAlign.center,
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       SizedBox(
-      //         height: size.height * 0.02,
-      //       ),
-      //       GestureDetector(
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //         },
-      //         child: Container(
-      //           width: size.width * 0.90,
-      //           height: size.height * 0.07,
-      //           decoration: ShapeDecoration(
-      //             shape: RoundedRectangleBorder(),
-      //             color: Colors.transparent,
-      //           ),
-      //           child: Padding(
-      //             padding: EdgeInsets.all(1),
-      //             child: DecoratedBox(
-      //               decoration: ShapeDecoration(
-      //                 shape: RoundedRectangleBorder(
-      //                   borderRadius: BorderRadius.circular(10),
-      //                 ),
-      //                 gradient: LinearGradient(
-      //                   colors: [
-      //                     kButtonNoColor,
-      //                     kButtonNoColor,
-      //                   ],
-      //                   begin: Alignment.topLeft,
-      //                   end: Alignment.bottomRight,
-      //                 ),
-      //               ),
-      //               child: Center(
-      //                 child: Text(
-      //                   'กลับ',
-      //                   style: TextStyle(
-      //                     color: Colors.white,
-      //                     fontSize: isPhone(context) ? 18 : 28,
-      //                   ),
-      //                   textAlign: TextAlign.center,
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       SizedBox(
-      //         height: size.height * 0.02,
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      bottomNavigationBar: Container(
+        height: size.height * 0.2,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              kContentColor3,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              Colors.white,
+              kContentColor3,
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            GestureDetector(
+              onTap: () async {
+                if (_formKey.currentState!.validate()) {
+                  if (isPhone(context)) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FemaleBreastCancer(
+                                  fname: fname.text,
+                                  lname: lname.text,
+                                  sex: sex.text,
+                                  address: address.text,
+                                  phone: phone.text,
+                                  age: age.text,
+                                  email: email.text,
+                                  idcard: idcard.text,
+                                  selecteProvinces: provin.text,
+                                )));
+                    // try {
+                    //   LoadingDialog.open(context);
+                    //   final _member = await HomeApi.addMembers(fname: fname.text, lname: lname.text, idcard: idcard.text, email: email.text, phone: phone.text, address: address.text);
+                    //   if (!mounted) return;
+                    //   LoadingDialog.close(context);
+                    //   if (_member != null) {
+                    //     final ok2 = await showDialog(
+                    //       context: context,
+                    //       barrierDismissible: false,
+                    //       builder: (context) => SuccessDialog(
+                    //         title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                    //         pressYes: () {
+                    //           Navigator.pop(context, true);
+                    //         },
+                    //       ),
+                    //     );
+                    //     if (ok2 == true) {
+                    //       Navigator.push(context, MaterialPageRoute(builder: (context) => FemaleBreastCancer()));
+                    //     }
+                    //   } else {}
+                    // } on Exception catch (e) {
+                    //   if (!mounted) return;
+                    //   LoadingDialog.close(context);
+                    //   showDialog(
+                    //     context: context,
+                    //     barrierDismissible: false,
+                    //     builder: (context) => SuccessDialog(
+                    //       title: '${e}',
+                    //       pressYes: () {
+                    //         Navigator.pop(context, true);
+                    //       },
+                    //     ),
+                    //   );
+                    // }
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FemaleBreastCancer(
+                                  fname: fname.text,
+                                  lname: lname.text,
+                                  sex: sex.text,
+                                  address: address.text,
+                                  phone: phone.text,
+                                  age: age.text,
+                                  email: email.text,
+                                  idcard: idcard.text,
+                                  selecteProvinces: selecteProvinces!.name,
+                                )));
+                    // try {
+                    //   LoadingDialog.open(context);
+                    //   final _member = await HomeApi.addMembers(fname: fname.text, lname: lname.text, idcard: idcard.text, email: email.text, phone: phone.text, address: address.text);
+                    //   if (!mounted) return;
+                    //   LoadingDialog.close(context);
+                    //   if (_member != null) {
+                    //     final ok2 = await showDialog(
+                    //       context: context,
+                    //       barrierDismissible: false,
+                    //       builder: (context) => SuccessDialogTablet(
+                    //         page: 1,
+                    //         title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                    //         pressYes: () {
+                    //           Navigator.pop(context, true);
+                    //         },
+                    //       ),
+                    //     );
+                    //     if (ok2 == true) {
+                    //       Navigator.push(context, MaterialPageRoute(builder: (context) => FemaleBreastCancer()));
+                    //     }
+                    //   } else {}
+                    // } on Exception catch (e) {
+                    //   if (!mounted) return;
+                    //   LoadingDialog.close(context);
+                    //   showDialog(
+                    //     context: context,
+                    //     barrierDismissible: false,
+                    //     builder: (context) => SuccessDialogTablet(
+                    //       page: 0,
+                    //       title: '${e}',
+                    //       pressYes: () {
+                    //         Navigator.pop(context, true);
+                    //       },
+                    //     ),
+                    //   );
+                    // }
+                  }
+                }
+              },
+              child: Container(
+                width: size.width * 0.90,
+                height: size.height * 0.07,
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(),
+                  color: Colors.transparent,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: DecoratedBox(
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      gradient: LinearGradient(
+                        colors: [
+                          kContentColor1,
+                          kContentColor2,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'ถัดไป',
+                        style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 28, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: size.width * 0.90,
+                height: size.height * 0.07,
+                decoration: ShapeDecoration(
+                  shape: RoundedRectangleBorder(),
+                  color: Colors.transparent,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(1),
+                  child: DecoratedBox(
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      gradient: LinearGradient(
+                        colors: [
+                          kButtonNoColor,
+                          kButtonNoColor,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'กลับ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: isPhone(context) ? 18 : 28,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

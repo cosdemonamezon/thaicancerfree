@@ -52,7 +52,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
           evaluations = _evaluations;
           for (var i = 0; i < _evaluations.length; i++) {
             selectedOption1.add(selectedQuestion1);
-            cerrentQuestion1.add(selectedQuestion1[2]);            
+            cerrentQuestion1.add(selectedQuestion1[2]);
           }
         });
       }
@@ -295,7 +295,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                             Navigator.pop(context, true);
                                           },
                                         ),
-                                      );                                      
+                                      );
                                     } else {
                                       //inspect(estimates);
                                       final _takeAssessment = await HomeApi.takeAssessment(estimates: estimates);
@@ -480,14 +480,6 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                         },
                                       ),
                                     );
-                                    if (sumQuestion1.isNotEmpty) {
-                                      for (var i = 0; i < evaluations.length; i++) {
-                                        if (evaluations[i].selected == 2) {
-                                          print(evaluations[i].selected);
-                                          break;
-                                        }
-                                      }
-                                    }
                                   }
                                 } on Exception catch (e) {
                                   if (!mounted) return;

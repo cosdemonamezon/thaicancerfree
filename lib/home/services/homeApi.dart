@@ -38,7 +38,7 @@ class HomeApi {
         }));
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = convert.jsonDecode(response.body);
-      return data['message'];
+      return data['data'];
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);
@@ -57,7 +57,8 @@ class HomeApi {
       required String birthday,
       required String khet_id,
       required String province_id,
-      required String hospital_id}) async {
+      required String hospital_id,
+      required String code}) async {
     final url = Uri.https(publicUrl, '/thaicancel/public/api/member');
     var headers = {'Content-Type': 'application/json'};
     final response = await http.post(
@@ -74,7 +75,8 @@ class HomeApi {
           "birthday": birthday,
           "khet_id": khet_id,
           "province_id": province_id,
-          "hospital_id": hospital_id
+          "hospital_id": hospital_id,
+          "code": code
         }));
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = convert.jsonDecode(response.body);

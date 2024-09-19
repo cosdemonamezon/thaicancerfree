@@ -11,7 +11,7 @@ class RiskCancerDialogTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size.width * 0.65,
+      width: size.width * 0.66,
       height: size.height * 0.25,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -22,8 +22,8 @@ class RiskCancerDialogTablet extends StatelessWidget {
               topRight: Radius.circular(10),
             ),
             child: Container(
-              width: size.width * 0.65,
-              height: size.height * 0.25,
+              width: size.width * 0.67,
+              height: size.height * 0.21,
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border(
@@ -65,7 +65,7 @@ class RiskCancerDialogTablet extends StatelessWidget {
                                 '1.',
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: isPhone(context) ? 18 : 28,
+                                  fontSize: isPhone(context) ? 18 : 23.3,
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'Prompt',
                                 ),
@@ -77,7 +77,7 @@ class RiskCancerDialogTablet extends StatelessWidget {
                                 'อายุตั้งแต่ 40 ปีขึ้นไป',
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: isPhone(context) ? 18 : 28,
+                                  fontSize: isPhone(context) ? 18 : 23.3,
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'Prompt',
                                 ),
@@ -98,19 +98,19 @@ class RiskCancerDialogTablet extends StatelessWidget {
                                 '2.',
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: isPhone(context) ? 18 : 28,
+                                  fontSize: isPhone(context) ? 18 : 23.3,
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'Prompt',
                                 ),
                               ),
                             ),
                             Expanded(
-                              flex: 12,
+                              flex: 16,
                               child: Text(
                                 'มีญาติสายตรง (First Degree relatives) ได้แก่ พ่อ แม่ พี่ น้อง บุตร เป็นมะเร็งเต้านม',
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: isPhone(context) ? 18 : 28,
+                                  fontSize: isPhone(context) ? 18 : 23.3,
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'Prompt',
                                 ),
@@ -133,7 +133,7 @@ class RiskCancerDialogTablet extends StatelessWidget {
                 bottomRight: Radius.circular(10),
               ),
             ),
-            width: size.width * 0.65,
+            width: size.width * 0.67,
             height: size.height * 0.05,
             child: Row(
               children: [
@@ -181,7 +181,7 @@ class RiskCancerDialogTablet extends StatelessWidget {
                         ),
                         child: Center(
                             child: Text(
-                          'ตกลง',
+                          'รับทราบ',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: isPhone(context) ? 19.55 : 25.55,
