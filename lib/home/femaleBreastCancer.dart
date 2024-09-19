@@ -1000,16 +1000,40 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
                     } else {
                       if (!mounted) return;
                       LoadingDialog.close(context);
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => SuccessDialog(
-                          title: 'ไม่ได้เลือก เขต จังหวัด หรือโรงพยาบาล',
-                          pressYes: () {
-                            Navigator.pop(context, true);
-                          },
-                        ),
-                      );
+                      if (selectedProvince == null) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => SuccessDialog(
+                            title: 'ไม่ได้เลือก จังหวัด',
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      } else if (selectedDistrict == null) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => SuccessDialog(
+                            title: 'ไม่ได้เลือก เขต',
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      } else {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => SuccessDialog(
+                            title: 'ไม่ได้เลือก โรงพยาบาล',
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }
                     }
                   } on Exception catch (e) {
                     if (!mounted) return;
@@ -1141,17 +1165,43 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
                     } else {
                       if (!mounted) return;
                       LoadingDialog.close(context);
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => SuccessDialogTablet(
-                          page: 0,
-                          title: 'ไม่ได้เลือก เขต จังหวัด หรือโรงพยาบาล',
-                          pressYes: () {
-                            Navigator.pop(context, true);
-                          },
-                        ),
-                      );
+                      if (selectedProvince == null) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => SuccessDialogTablet(
+                            page: 0,
+                            title: 'ไม่ได้เลือก จังหวัด',
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      } else if (selectedDistrict == null) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => SuccessDialogTablet(
+                            page: 0,
+                            title: 'ไม่ได้เลือก เขต',
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      } else {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => SuccessDialogTablet(
+                            page: 0,
+                            title: 'ไม่ได้เลือก โรงพยาบาล',
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                      }
                     }
 
                     // if (_member != null) {

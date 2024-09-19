@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:thaicancerfree/constants.dart';
 
-class SuccessDialogTablet extends StatelessWidget {
-  const SuccessDialogTablet({
+class SuccessDialogTablet1 extends StatelessWidget {
+  const SuccessDialogTablet1({
     super.key,
     required this.pressYes,
     required this.title,
@@ -17,8 +17,8 @@ class SuccessDialogTablet extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      // width: size.width * 0.50,
-      // height: size.height * 0.17,
+      width: size.width * 0.50,
+      height: size.height * 0.17,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: size.width * 0.12),
         child: Column(
@@ -30,8 +30,8 @@ class SuccessDialogTablet extends StatelessWidget {
                 topRight: Radius.circular(10),
               ),
               child: Container(
-                // width: size.width * 0.50,
-                // height: size.height * 0.17,
+                width: size.width * 0.50,
+                height: size.height * 0.17,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border(
@@ -79,7 +79,7 @@ class SuccessDialogTablet extends StatelessWidget {
                               decoration: TextDecoration.none,
                               fontFamily: 'Prompt',
                             ),
-                            textAlign: TextAlign.start,
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
@@ -96,7 +96,7 @@ class SuccessDialogTablet extends StatelessWidget {
                   bottomRight: Radius.circular(10),
                 ),
               ),
-              //width: size.width * 0.50,
+              width: size.width * 0.50,
               height: size.height * 0.05,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -10,6 +10,7 @@ import 'package:thaicancerfree/home/widgets/HeaderQuestionWidget.dart';
 import 'package:thaicancerfree/home/widgets/NewSuccesDialog.dart';
 import 'package:thaicancerfree/home/widgets/SuccessDialog.dart';
 import 'package:thaicancerfree/home/widgets/SuccessDialogTablet.dart';
+import 'package:thaicancerfree/home/widgets/SuccessDialogTablet1.dart';
 import 'package:thaicancerfree/models/estimates.dart';
 import 'package:thaicancerfree/models/evaluation.dart';
 import 'package:thaicancerfree/widgets/LoadingDialog.dart';
@@ -66,7 +67,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
           context: context,
           barrierDismissible: false,
           builder: (context) => SuccessDialog(
-            title: '${e}',
+            title: '${e.getMessage}',
             pressYes: () {
               Navigator.pop(context, true);
             },
@@ -78,7 +79,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
           barrierDismissible: false,
           builder: (context) => SuccessDialogTablet(
             page: 0,
-            title: '${e}',
+            title: '${e.getMessage}',
             pressYes: () {
               Navigator.pop(context, true);
             },
@@ -242,7 +243,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                   context: context,
                                   barrierDismissible: false,
                                   builder: (context) => SuccessDialog(
-                                    title: 'ยังไม่ได้ทำแบบประเมิน',
+                                    title: 'คุณยังไม่ได้ทำแบบประเมิน',
                                     pressYes: () {
                                       Navigator.pop(context, true);
                                     },
@@ -252,9 +253,9 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                 showDialog(
                                   context: context,
                                   barrierDismissible: false,
-                                  builder: (context) => SuccessDialogTablet(
+                                  builder: (context) => SuccessDialogTablet1(
                                     page: 0,
-                                    title: 'ยังไม่ได้ทำแบบประเมิน',
+                                    title: 'คุณยังไม่ได้ทำแบบประเมิน',
                                     pressYes: () {
                                       Navigator.pop(context, true);
                                     },
@@ -290,7 +291,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                         context: context,
                                         barrierDismissible: false,
                                         builder: (context) => SuccessDialog(
-                                          title: 'ท่านทำแบบทดสอบไม่ครบ',
+                                          title: 'คุณทำแบบทดสอบไม่ครบ',
                                           pressYes: () {
                                             Navigator.pop(context, true);
                                           },
@@ -355,7 +356,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                       context: context,
                                       barrierDismissible: false,
                                       builder: (context) => SuccessDialog(
-                                        title: 'ท่านทำแบบทดสอบไม่ครบ',
+                                        title: 'คุณทำแบบทดสอบไม่ครบ',
                                         pressYes: () {
                                           Navigator.pop(context, true);
                                         },
@@ -404,9 +405,9 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                       showDialog(
                                         context: context,
                                         barrierDismissible: false,
-                                        builder: (context) => SuccessDialogTablet(
+                                        builder: (context) => SuccessDialogTablet1(
                                           page: 0,
-                                          title: 'ท่านทำแบบทดสอบไม่ครบ',
+                                          title: 'คุณทำแบบทดสอบไม่ครบ',
                                           pressYes: () {
                                             Navigator.pop(context, true);
                                           },
@@ -472,9 +473,9 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                     showDialog(
                                       context: context,
                                       barrierDismissible: false,
-                                      builder: (context) => SuccessDialogTablet(
+                                      builder: (context) => SuccessDialogTablet1(
                                         page: 0,
-                                        title: 'ท่านทำแบบทดสอบไม่ครบ',
+                                        title: 'คุณทำแบบทดสอบไม่ครบ',
                                         pressYes: () {
                                           Navigator.pop(context, true);
                                         },
@@ -495,7 +496,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                   showDialog(
                                     context: context,
                                     barrierDismissible: false,
-                                    builder: (context) => SuccessDialogTablet(
+                                    builder: (context) => SuccessDialogTablet1(
                                       page: 0,
                                       title: '${e.getMessage}',
                                       pressYes: () {

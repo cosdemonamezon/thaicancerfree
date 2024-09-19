@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:thaicancerfree/constants.dart';
 import 'package:thaicancerfree/home/registerPage.dart';
 import 'package:thaicancerfree/home/riskBreastCancer.dart';
@@ -9,6 +13,9 @@ import 'package:thaicancerfree/home/widgets/RiskCancerDialogTablet.dart';
 import 'package:thaicancerfree/home/widgets/RiskCancerDialogTablet2.dart';
 import 'package:thaicancerfree/home/widgets/RiskDialog.dart';
 import 'package:thaicancerfree/home/widgets/RiskDialogTablet.dart';
+import 'package:thaicancerfree/home/widgets/SuccessDialog.dart';
+import 'package:thaicancerfree/home/widgets/SuccessDialogTablet.dart';
+import 'package:thaicancerfree/home/widgets/SuccessDialogTablet1.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,6 +25,96 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<ConnectivityResult> connectionStatus = [ConnectivityResult.none];
+  final Connectivity connectivity = Connectivity();
+  late StreamSubscription<List<ConnectivityResult>> connectivitySubscription;
+  bool checkOpendialog = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initConnectivity();
+
+    connectivitySubscription = connectivity.onConnectivityChanged.listen(updateConnectionStatus);
+  }
+
+  @override
+  void dispose() {
+    connectivitySubscription.cancel();
+    super.dispose();
+  }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initConnectivity() async {
+    late List<ConnectivityResult> result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      //developer.log('Couldn\'t check connectivity status', error: e);
+      print('check connectivity status error: $e');
+      return;
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return updateConnectionStatus(result);
+  }
+
+  void checkNoInternet() {
+    if (connectionStatus[0] == ConnectivityResult.none) {
+      if (checkOpendialog == false) {
+        setState(() {
+          checkOpendialog = true;
+        });
+        if (isPhone(context)) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => SuccessDialog(
+              title: 'ไม่ได้เชื่อมต่ออินเทอร์เน็ต',
+              pressYes: () {
+                setState(() {
+                  checkOpendialog = false;
+                });
+                Navigator.pop(context, true);
+              },
+            ),
+          );
+        } else {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => SuccessDialogTablet1(
+              page: 0,
+              title: 'คุณไม่ได้เชื่อมต่ออินเทอร์เน็ต',
+              pressYes: () {
+                setState(() {
+                  checkOpendialog = false;
+                });
+                Navigator.pop(context, true);
+              },
+            ),
+          );
+        }
+      } else {}
+    }
+  }
+
+  Future<void> updateConnectionStatus(List<ConnectivityResult> result) async {
+    setState(() {
+      connectionStatus = result;
+    });
+    // ignore: avoid_print
+    print('Connectivity changed: $connectionStatus');
+    checkNoInternet();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -59,10 +156,10 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               Positioned(
-                top: isPhone(context) ? 60 :60,
-                bottom: isPhone(context) ? 60 :60,
-                left: isPhone(context) ? 40 :60,
-                right: isPhone(context) ? 40 :60,
+                top: isPhone(context) ? 60 : 60,
+                bottom: isPhone(context) ? 60 : 60,
+                left: isPhone(context) ? 40 : 60,
+                right: isPhone(context) ? 40 : 60,
                 child: Container(
                     height: size.height * 0.93,
                     width: size.width * 0.88,
@@ -100,106 +197,70 @@ class _HomePageState extends State<HomePage> {
                     fit: BoxFit.fill,
                   )),
               Positioned(
-                bottom: isPhone(context) ?275 :420,
+                bottom: isPhone(context) ? 275 : 420,
                 left: 30,
                 right: 30,
                 child: NewContentWidget(
                   size: size,
                   title: 'ประเมินความเสี่ยงมะเร็งเต้านม\nสำหรับบุคลทั่วไป',
                   press: () async {
-                    if (isPhone(context)) {
-                      final ok = await showDialog(
-                        context: context,
-                        builder: (context) => RiskDialog(
-                          size: size,
-                          pressNo: () {
-                            Navigator.pop(context, false);
-                          },
-                          pressYes: () {
-                            Navigator.pop(context, true);
-                          },
-                        ),
-                      );
-                      if (ok == true) {
-                        if (!mounted) return;
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => RiskBreastCancer()));
-                      }
+                    if (connectionStatus[0] == ConnectivityResult.none) {
+                      checkNoInternet();
                     } else {
-                      final ok = await showDialog(
-                        context: context,
-                        builder: (context) => RiskDialogTablet(
-                          size: size,
-                          pressNo: () {
-                            Navigator.pop(context, false);
-                          },
-                          pressYes: () {
-                            Navigator.pop(context, true);
-                          },
-                        ),
-                      );
-                      if (ok == true) {
-                        if (!mounted) return;
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => RiskBreastCancer()));
+                      if (isPhone(context)) {
+                        final ok = await showDialog(
+                          context: context,
+                          builder: (context) => RiskDialog(
+                            size: size,
+                            pressNo: () {
+                              Navigator.pop(context, false);
+                            },
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                        if (ok == true) {
+                          if (!mounted) return;
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => RiskBreastCancer()));
+                        }
+                      } else {
+                        final ok = await showDialog(
+                          context: context,
+                          builder: (context) => RiskDialogTablet(
+                            size: size,
+                            pressNo: () {
+                              Navigator.pop(context, false);
+                            },
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                        if (ok == true) {
+                          if (!mounted) return;
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => RiskBreastCancer()));
+                        }
                       }
                     }
                   },
                 ),
               ),
               Positioned(
-                bottom: isPhone(context) ?126 :150,
+                bottom: isPhone(context) ? 126 : 150,
                 left: 30,
                 right: 30,
                 child: NewContentWidget(
                   size: size,
                   title: 'สำหรับสตรีอายุตั้งแต่ 40 ปีขึ้นไป\nและมีญาติสายตรงเป็นมะเร็งเต้านม',
                   press: () async {
-                    if (isPhone(context)) {
-                      final ok = await showDialog(
-                        context: context,
-                        builder: (context) => RiskCancerDialog(
-                          size: size,
-                          pressNo: () {
-                            Navigator.pop(context, false);
-                          },
-                          pressYes: () {
-                            Navigator.pop(context, true);
-                          },
-                        ),
-                      );
-                      if (ok == true) {
-                        final ok2 = await showDialog(
-                          context: context,
-                          builder: (context) => RiskCancerDialog2(
-                            size: size,
-                            pressNo: () {
-                              Navigator.pop(context, false);
-                            },
-                            pressYes: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                        if (ok2 == true) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
-                        }
-                      }
+                    if (connectionStatus[0] == ConnectivityResult.none) {
+                      checkNoInternet();
                     } else {
-                      final ok = await showDialog(
-                        context: context,
-                        builder: (context) => RiskCancerDialogTablet(
-                          size: size,
-                          pressNo: () {
-                            Navigator.pop(context, false);
-                          },
-                          pressYes: () {
-                            Navigator.pop(context, true);
-                          },
-                        ),
-                      );
-                      if (ok == true) {
-                        final ok2 = await showDialog(
+                      if (isPhone(context)) {
+                        final ok = await showDialog(
                           context: context,
-                          builder: (context) => RiskCancerDialogTablet2(
+                          builder: (context) => RiskCancerDialog(
                             size: size,
                             pressNo: () {
                               Navigator.pop(context, false);
@@ -209,8 +270,52 @@ class _HomePageState extends State<HomePage> {
                             },
                           ),
                         );
-                        if (ok2 == true) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                        if (ok == true) {
+                          final ok2 = await showDialog(
+                            context: context,
+                            builder: (context) => RiskCancerDialog2(
+                              size: size,
+                              pressNo: () {
+                                Navigator.pop(context, false);
+                              },
+                              pressYes: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          if (ok2 == true) {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                          }
+                        }
+                      } else {
+                        final ok = await showDialog(
+                          context: context,
+                          builder: (context) => RiskCancerDialogTablet(
+                            size: size,
+                            pressNo: () {
+                              Navigator.pop(context, false);
+                            },
+                            pressYes: () {
+                              Navigator.pop(context, true);
+                            },
+                          ),
+                        );
+                        if (ok == true) {
+                          final ok2 = await showDialog(
+                            context: context,
+                            builder: (context) => RiskCancerDialogTablet2(
+                              size: size,
+                              pressNo: () {
+                                Navigator.pop(context, false);
+                              },
+                              pressYes: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                          if (ok2 == true) {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                          }
                         }
                       }
                     }

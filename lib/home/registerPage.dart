@@ -284,7 +284,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               validator: (val) => val == '' || val == null || val.isEmpty
                                   ? 'กรุณากรอกเลขบัตรประชาชน'
                                   : val.length < 13
-                                      ? 'กรอกเลขบัตรประชาชนไม่คบ'
+                                      ? 'กรอกเลขบัตรประชาชนไม่ครบ'
                                       : null,
                             ),
                             SizedBox(height: size.height * 0.02),
