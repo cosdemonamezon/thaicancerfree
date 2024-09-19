@@ -10,6 +10,7 @@ import 'package:thaicancerfree/home/services/homeApi.dart';
 import 'package:thaicancerfree/home/widgets/NewSuccesDialog.dart';
 import 'package:thaicancerfree/home/widgets/SuccessDialog.dart';
 import 'package:thaicancerfree/home/widgets/SuccessDialogTablet.dart';
+import 'package:thaicancerfree/home/widgets/SuccessDialogTablet1.dart';
 import 'package:thaicancerfree/models/district.dart';
 import 'package:thaicancerfree/models/hospital.dart';
 import 'dart:convert' as convert;
@@ -1169,7 +1170,7 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
                         showDialog(
                           context: context,
                           barrierDismissible: false,
-                          builder: (context) => SuccessDialogTablet(
+                          builder: (context) => SuccessDialogTablet1(
                             page: 0,
                             title: 'ไม่ได้เลือก จังหวัด',
                             pressYes: () {
@@ -1181,7 +1182,7 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
                         showDialog(
                           context: context,
                           barrierDismissible: false,
-                          builder: (context) => SuccessDialogTablet(
+                          builder: (context) => SuccessDialogTablet1(
                             page: 0,
                             title: 'ไม่ได้เลือก เขต',
                             pressYes: () {
@@ -1193,7 +1194,7 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
                         showDialog(
                           context: context,
                           barrierDismissible: false,
-                          builder: (context) => SuccessDialogTablet(
+                          builder: (context) => SuccessDialogTablet1(
                             page: 0,
                             title: 'ไม่ได้เลือก โรงพยาบาล',
                             pressYes: () {

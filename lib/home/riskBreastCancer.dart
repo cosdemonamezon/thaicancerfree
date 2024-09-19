@@ -291,7 +291,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                         context: context,
                                         barrierDismissible: false,
                                         builder: (context) => SuccessDialog(
-                                          title: 'คุณทำแบบทดสอบไม่ครบ',
+                                          title: 'คุณทำแบบประเมินไม่ครบ',
                                           pressYes: () {
                                             Navigator.pop(context, true);
                                           },
@@ -319,7 +319,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                           context: context,
                                           barrierDismissible: false,
                                           builder: (context) => NewScessDialog(
-                                            title: 'ทำแบบทดสอบสำเร็จ',
+                                            title: 'ทำแบบประเมินสำเร็จ',
                                             pressYes: () async {
                                               Navigator.pop(context, true);
                                             },
@@ -356,7 +356,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                       context: context,
                                       barrierDismissible: false,
                                       builder: (context) => SuccessDialog(
-                                        title: 'คุณทำแบบทดสอบไม่ครบ',
+                                        title: 'คุณทำแบบประเมินไม่ครบ',
                                         pressYes: () {
                                           Navigator.pop(context, true);
                                         },
@@ -407,7 +407,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                         barrierDismissible: false,
                                         builder: (context) => SuccessDialogTablet1(
                                           page: 0,
-                                          title: 'คุณทำแบบทดสอบไม่ครบ',
+                                          title: 'คุณทำแบบประเมินไม่ครบ',
                                           pressYes: () {
                                             Navigator.pop(context, true);
                                           },
@@ -437,7 +437,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                           context: context,
                                           barrierDismissible: false,
                                           builder: (context) => NewScessDialog(
-                                            title: 'ทำแบบทดสอบสำเร็จ',
+                                            title: 'ทำแบบประเมินสำเร็จ',
                                             pressYes: () async {
                                               Navigator.pop(context, true);
                                             },
@@ -475,7 +475,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                       barrierDismissible: false,
                                       builder: (context) => SuccessDialogTablet1(
                                         page: 0,
-                                        title: 'คุณทำแบบทดสอบไม่ครบ',
+                                        title: 'คุณทำแบบประเมินไม่ครบ',
                                         pressYes: () {
                                           Navigator.pop(context, true);
                                         },
@@ -496,7 +496,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                   showDialog(
                                     context: context,
                                     barrierDismissible: false,
-                                    builder: (context) => SuccessDialogTablet1(
+                                    builder: (context) => SuccessDialogTablet(
                                       page: 0,
                                       title: '${e.getMessage}',
                                       pressYes: () {
