@@ -20,6 +20,7 @@ class RiskCancerDialog2 extends StatelessWidget {
               color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Prompt',
             ),
           ),
           Divider(),
@@ -33,6 +34,7 @@ class RiskCancerDialog2 extends StatelessWidget {
               color: Colors.black,
               fontSize: 18,
               fontWeight: FontWeight.w500,
+              fontFamily: 'Prompt',
             ),
             textAlign: TextAlign.start,
           ),
@@ -49,16 +51,19 @@ class RiskCancerDialog2 extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
+                      fontFamily: 'Prompt',
                     ),
                   )),
               Expanded(
                   flex: 9,
                   child: Text(
                     'บัตรประจำตัวประชาชน',
+                    textAlign: TextAlign.start,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
+                      fontFamily: 'Prompt',
                     ),
                   ))
             ],
@@ -78,16 +83,19 @@ class RiskCancerDialog2 extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
+                      fontFamily: 'Prompt',
                     ),
                   )),
               Expanded(
                   flex: 9,
                   child: Text(
                     'ใบรับรองแพทย์ที่ระบุว่า ญาติสายตรงของท่านเป็นมะเร็งเต้านม',
+                    textAlign: TextAlign.start,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
+                      fontFamily: 'Prompt',
                     ),
                   ))
             ],
@@ -99,20 +107,18 @@ class RiskCancerDialog2 extends StatelessWidget {
           onPressed: pressNo,
           child: Text(
             'ปิด',
-            // style: TextStyle(
-            //   color: kThemeTextColor,
-            //   fontFamily: fontFamily,
-            // ),
+            style: TextStyle(
+              fontFamily: 'Prompt',
+            ),
           ),
         ),
         CupertinoDialogAction(
           onPressed: pressYes,
           child: Text(
             'ลงทะเบียน',
-            // style: TextStyle(
-            //   color: kThemeTextColor,
-            //   fontFamily: fontFamily,
-            // ),
+            style: TextStyle(
+              fontFamily: 'Prompt',
+            ),
           ),
         ),
         // Row(

@@ -19,6 +19,7 @@ class RiskCancerDialog extends StatelessWidget {
               color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Prompt',
             ),
           ),
           Divider(),
@@ -31,12 +32,33 @@ class RiskCancerDialog extends StatelessWidget {
           ),
           Row(
             children: [
-              Text(
-                '1. อายุตั้งแต่ 40 ปีขึ้นไป',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+              Expanded(
+                flex: 1,
+                child: Text(
+                  '1. ',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Prompt',
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: SizedBox(width: size.width * 0.001,),
+              ),
+              Expanded(
+                flex: 12,
+                child: Text(
+                  'อายุตั้งแต่ 40 ปีขึ้นไป',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Prompt',
+                  ),
                 ),
               ),
             ],
@@ -46,15 +68,35 @@ class RiskCancerDialog extends StatelessWidget {
             height: size.height * 0.01,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 9,
+                flex: 1,
                 child: Text(
-                  '2. มีญาติสายตรง (First Degree relatives) ได้แก่ พ่อ แม่ พี่ น้อง บุตร เป็นมะเร็งเต้านม',
+                  '2. ',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
+                    fontFamily: 'Prompt',
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: SizedBox(width: size.width * 0.001,),
+              ),
+              Expanded(
+                flex: 12,
+                child: Text(
+                  'มีญาติสายตรง (First Degree relatives) ได้แก่ พ่อ แม่ พี่ น้อง บุตร เป็นมะเร็งเต้านม',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: 'Prompt',
                   ),
                 ),
               ),
@@ -68,20 +110,18 @@ class RiskCancerDialog extends StatelessWidget {
           onPressed: pressNo,
           child: Text(
             'ปิด',
-            // style: TextStyle(
-            //   color: kThemeTextColor,
-            //   fontFamily: fontFamily,
-            // ),
+            style: TextStyle(
+              fontFamily: 'Prompt',
+            ),
           ),
         ),
         CupertinoDialogAction(
           onPressed: pressYes,
           child: Text(
             'ตกลง',
-            // style: TextStyle(
-            //   color: kThemeTextColor,
-            //   fontFamily: fontFamily,
-            // ),
+            style: TextStyle(
+              fontFamily: 'Prompt',
+            ),
           ),
         ),
        

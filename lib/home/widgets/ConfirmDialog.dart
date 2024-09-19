@@ -31,6 +31,7 @@ class ConfirmDialog extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 24,
                     fontWeight: FontWeight.w500,
+                    fontFamily: 'Prompt',
                   ),
                   textAlign: TextAlign.start,
                 ),
@@ -76,6 +77,7 @@ class ConfirmDialog extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
+                            fontFamily: 'Prompt',
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -112,7 +114,12 @@ class ConfirmDialog extends StatelessWidget {
                       child: Center(
                         child: Text(
                           'ตกลง',
-                          style: TextStyle(color: kContentTextColor, fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: kContentTextColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Prompt',
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       ),

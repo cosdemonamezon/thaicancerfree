@@ -19,6 +19,7 @@ class SuccessDialog extends StatelessWidget {
               color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Prompt',
             ),
           ),
           //Divider(),
@@ -34,6 +35,7 @@ class SuccessDialog extends StatelessWidget {
             color: Colors.black,
             fontSize: 18,
             fontWeight: FontWeight.w500,
+            fontFamily: 'Prompt',
           ),
           textAlign: TextAlign.start,
         ),
@@ -43,10 +45,9 @@ class SuccessDialog extends StatelessWidget {
           onPressed: pressYes,
           child: Text(
             'ตกลง',
-            // style: TextStyle(
-            //   color: kThemeTextColor,
-            //   fontFamily: fontFamily,
-            // ),
+            style: TextStyle(
+              fontFamily: 'Prompt',
+            ),
           ),
         ),
         // Center(

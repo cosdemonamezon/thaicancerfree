@@ -43,6 +43,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                         color: Colors.black,
                         fontSize: isPhone(context) ? 19.55 : 28.55,
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'Prompt',
                       ),
                     ),
                   ),
@@ -59,6 +60,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                             color: Colors.black,
                             fontSize: isPhone(context) ? 18 : 28.5,
                             fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
                           ),
                           textAlign: TextAlign.start,
                         ),
@@ -82,6 +84,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                                     color: Colors.black,
                                     fontSize: isPhone(context) ? 18 : 28,
                                     fontWeight: FontWeight.w500,
+                                    fontFamily: 'Prompt',
                                   ),
                                 )),
                             Expanded(
@@ -92,6 +95,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                                     color: Colors.black,
                                     fontSize: isPhone(context) ? 18 : 28,
                                     fontWeight: FontWeight.w500,
+                                    fontFamily: 'Prompt',
                                   ),
                                 ))
                           ],
@@ -111,6 +115,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                                     color: Colors.black,
                                     fontSize: isPhone(context) ? 18 : 28,
                                     fontWeight: FontWeight.w500,
+                                    fontFamily: 'Prompt',
                                   ),
                                 )),
                             Expanded(
@@ -121,6 +126,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                                     color: Colors.black,
                                     fontSize: isPhone(context) ? 18 : 28,
                                     fontWeight: FontWeight.w500,
+                                    fontFamily: 'Prompt',
                                   ),
                                 ))
                           ],
@@ -164,6 +170,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                             color: Colors.black,
                             fontSize: isPhone(context) ? 19.55 : 25.55,
                             fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
                           ),
                           textAlign: TextAlign.start,
                         )),
@@ -192,6 +199,7 @@ class RiskCancerDialogTablet2 extends StatelessWidget {
                             color: Colors.black,
                             fontSize: isPhone(context) ? 19.55 : 25.55,
                             fontWeight: FontWeight.w500,
+                            fontFamily: 'Prompt',
                           ),
                           textAlign: TextAlign.start,
                         )),

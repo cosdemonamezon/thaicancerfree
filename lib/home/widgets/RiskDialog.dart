@@ -19,6 +19,7 @@ class RiskDialog extends StatelessWidget {
               color: Colors.black,
               fontSize: 22,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Prompt',
             ),
           ),
           Divider(),
@@ -31,6 +32,7 @@ class RiskDialog extends StatelessWidget {
           color: Colors.black,
           fontSize: 19.55,
           fontWeight: FontWeight.w500,
+          fontFamily: 'Prompt',
         ),
         textAlign: TextAlign.start,
       )),
@@ -39,20 +41,18 @@ class RiskDialog extends StatelessWidget {
           onPressed: pressNo,
           child: Text(
             'ปิด',
-            // style: TextStyle(
-            //   color: kThemeTextColor,
-            //   fontFamily: fontFamily,
-            // ),
+            style: TextStyle(
+              fontFamily: 'Prompt',
+            ),
           ),
         ),
         CupertinoDialogAction(
           onPressed: pressYes,
           child: Text(
             'ตกลง',
-            // style: TextStyle(
-            //   color: kThemeTextColor,
-            //   fontFamily: fontFamily,
-            // ),
+            style: TextStyle(
+              fontFamily: 'Prompt',
+            ),
           ),
         ),
         

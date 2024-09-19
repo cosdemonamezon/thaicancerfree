@@ -47,15 +47,15 @@ class NewContentWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       foreground: Paint()
                         ..style = PaintingStyle.stroke
-                        ..strokeWidth = 2.2
+                        ..strokeWidth = 1.8
                         ..color = Colors.black,
-                      shadows: [
-                        Shadow(
-                          //offset: Offset(1.0, 7.0), // position of the shadow
-                          //blurRadius: 3.0, // blur effect for the shadow
-                          color: Colors.grey, // color of the shadow
-                        ),
-                      ],
+                      // shadows: [
+                      //   Shadow(
+                      //     //offset: Offset(1.0, 7.0), // position of the shadow
+                      //     //blurRadius: 3.0, // blur effect for the shadow
+                      //     color: Colors.grey, // color of the shadow
+                      //   ),
+                      // ],
                     ),
                   ),
                   Text(
@@ -68,8 +68,8 @@ class NewContentWidget extends StatelessWidget {
                       color: Colors.white,
                       shadows: [
                         Shadow(
-                          offset: Offset(1.0, 7.0), // position of the shadow
-                          blurRadius: 3.0, // blur effect for the shadow
+                          offset: Offset(1.0, 1.0), // position of the shadow
+                          blurRadius: 1.0, // blur effect for the shadow
                           color: Colors.grey, // color of the shadow
                         ),
                       ],
@@ -82,5 +82,25 @@ class NewContentWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class NoShadowPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.8
+      ..color = Colors.black; // No shadow added
+
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }

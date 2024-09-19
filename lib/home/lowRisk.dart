@@ -39,6 +39,9 @@ class _LowRiskState extends State<LowRisk> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: size.height * 0.03,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -137,120 +140,126 @@ class _LowRiskState extends State<LowRisk> {
                 SizedBox(
                   height: size.height * 0.04,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      '5 สัญญานอันตราย มะเร็งเต้านม',
-                      style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 20 : 30, fontWeight: FontWeight.w700),
-                    )
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                  child: Row(
+                    children: [
+                      Text(
+                        '5 สัญญานอันตราย มะเร็งเต้านม',
+                        style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 20 : 30, fontWeight: FontWeight.w700),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            '1',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              '1.',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: Text(
-                            'พบก้อนเนื้อที่เป็นไตแข็งผิดปกติ กลิ้งได้ หรือยึดติดกับเนื้อเยื่อส่วนล่างตรงบริเวนเต้านม',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                          Expanded(
+                            flex: 10,
+                            child: Text(
+                              'พบก้อนเนื้อที่เป็นไตแข็งผิดปกติ กลิ้งได้ หรือยึดติดกับเนื้อเยื่อส่วนล่างตรงบริเวนเต้านม',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              '2.',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            '2',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                          Expanded(
+                            flex: 10,
+                            child: Text(
+                              'มีน้ำเหลืองและเลือดไหลจากหัวนม หรือเป็นแผลผิวหนังหัวนมถลอก',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              '3.',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: Text(
-                            'มีน้ำเหลืองและเลือดไหลจากหัวนม หรือเป็นแผลผิวหนังหัวนมถลอก',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                          Expanded(
+                            flex: 10,
+                            child: Text(
+                              'หัวนมถูกดึงรั้งจนผิดปกติ',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              '4.',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            '3',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                          Expanded(
+                            flex: 10,
+                            child: Text(
+                              'ผิวหนังบริเวนเต้านมเปลี่ยนไป ไม่ว่าจะเป็นรอยบุ๋มหรือผิวหนังบวมหนาตึงเหมือนผิวเปลือกส้มหรือเป็นแผล',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Text(
+                              '5.',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: Text(
-                            'หัวนมถูกดึงรั้งจนผิดปกติ',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            '4',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: Text(
-                            'ผิวหนังบริเวนเต้านมเปลี่ยนไป ไม่ว่าจะเป็นรอยบุ๋มหรือผิวหนังบวมหนาตึงเหมือนผิวเปลือกส้มหรือเป็นแผล',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Text(
-                            '5',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: Text(
-                            'ผิวหนังบริเวนลานหัวนมมีลักษณะที่เปลี่ยนไปจากเดิม เช่น มีผื่นคันที่เป็นๆ หายๆ ขนาดและรูปร่างต่างกันอย่างผิดปกติไม่อยู่ในระดับเดียวกัน',
-                            style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                          Expanded(
+                            flex: 10,
+                            child: Text(
+                              'ผิวหนังบริเวนลานหัวนมมีลักษณะที่เปลี่ยนไปจากเดิม เช่น มีผื่นคันที่เป็นๆ หายๆ ขนาดและรูปร่างต่างกันอย่างผิดปกติไม่อยู่ในระดับเดียวกัน',
+                              style: TextStyle(color: kContentTextColor, fontSize: isPhone(context) ? 18 : 26, fontWeight: FontWeight.w700),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: size.height * 0.09,
