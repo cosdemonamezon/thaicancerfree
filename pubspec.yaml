@@ -63,17 +63,17 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/images/images.png
+  image: assets/images/969_1054.png
   android: true
   ios: true
   web: false
   fullscreen: false
   android_gravity: center
-  android_12:
-    image: assets/images/images.png
-    color: "#FFFFFF"
-    fullscreen: false
-    android_gravity: center
+  # android_12:
+  #   image: assets/images/969_1054.png
+  #   color: "#FFFFFF"
+  #   fullscreen: false
+  #   android_gravity: center
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
