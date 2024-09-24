@@ -337,10 +337,95 @@ class _HomePageState extends State<HomePage> {
                   )),
                 ),
               ),
+              Positioned(
+                bottom: isPhone(context) ? size.height * 0.009 : size.height * 0.022,
+                left: isPhone(context) ? size.width * 0.02 : size.height * 0.04,
+                child: Stack(
+                  children: [
+                    // Text(
+                    //   'จำนวนผู้ใช้งานปัจจุบัน 100 คน',
+                    //   style: TextStyle(
+                    //     fontSize: isPhone(context) ? 15 : 20,
+                    //     fontWeight: FontWeight.w500,
+                    //     foreground: Paint()
+                    //       ..style = PaintingStyle.stroke
+                    //       ..strokeWidth = 2.2
+                    //       ..color = Colors.black,
+                    //   ),
+                    // ),
+                    Text(
+                      'จำนวนผู้ใช้งานปัจจุบัน 100 คน',
+                      style: TextStyle(
+                        fontSize: isPhone(context) ? 15 : 20,
+                        fontWeight: FontWeight.w500,
+                        color: kButtonNoColor,
+                        shadows: [
+                          Shadow(
+                            offset: Offset(1.0, 1.0), // position of the shadow
+                            blurRadius: 0.0, // blur effect for the shadow
+                            color: Colors.grey, // color of the shadow
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Positioned(
+              //   bottom: isPhone(context) ? size.height * 0.015 : size.height * 0.025,
+              //   right: isPhone(context) ? size.width * 0.02 : size.height * 0.04,
+              //   child: FloatingActionButton.extended(
+              //     backgroundColor: kContentColor2,
+              //     onPressed: () {},
+              //     label: Stack(
+              //       children: [
+              //         Text(
+              //           'จำนวนผู้ใช้งานปัจจุบัน 100 คน',
+              //           style: TextStyle(
+              //             fontSize: isPhone(context) ? 15 : 20,
+              //             fontWeight: FontWeight.w500,
+              //             foreground: Paint()
+              //               ..style = PaintingStyle.stroke
+              //               ..strokeWidth = 2.2
+              //               ..color = Colors.black,
+              //           ),
+              //         ),
+              //         Text(
+              //           'จำนวนผู้ใช้งานปัจจุบัน 100 คน',
+              //           style: TextStyle(
+              //             fontSize: isPhone(context) ? 15 : 20,
+              //             fontWeight: FontWeight.w500,
+              //             color: Colors.white,
+              //             shadows: [
+              //               Shadow(
+              //                 offset: Offset(1.0, 1.0), // position of the shadow
+              //                 blurRadius: 1.0, // blur effect for the shadow
+              //                 color: Colors.grey, // color of the shadow
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     // icon: Icon(
+              //     //   Icons.person_2,
+              //     //   color: kButtonNoColor,
+              //     //   size: isPhone(context) ? 35 : 40,
+              //     // ),
+              //   ),
+              // ),
             ],
           ),
         ),
       ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {
+      //     // เพิ่มการดำเนินการหลักของคุณที่นี่
+      //   },
+      //   label: Text('100'),
+      //   icon: Icon(Icons.person_2),
+      //   backgroundColor: Colors.blue,
+      // ),
       // bottomNavigationBar: Container(
       //   height: isPhone(context) ? size.height * 0.45998 : size.height * 0.46998, // Custom height
       //   decoration: BoxDecoration(
