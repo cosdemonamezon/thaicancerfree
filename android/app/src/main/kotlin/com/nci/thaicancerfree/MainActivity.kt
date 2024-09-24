@@ -1,4 +1,4 @@
-package com.example.thaicancerfree
+package com.nci.thaicancerfree
 
 import io.flutter.embedding.android.FlutterActivity
 
