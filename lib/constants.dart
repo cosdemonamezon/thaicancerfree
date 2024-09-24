@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 const kContentColor1 = Color(0xffF0A8D0);
@@ -15,14 +16,11 @@ bool isPhone(BuildContext context) => MediaQuery.of(context).size.shortestSide <
 
 const String publicUrl = 'asha-tech.co.th';
 
+List<ConnectivityResult> connectionStatus = [ConnectivityResult.none];
+
 const List<Map<String, dynamic>> sexList = [
-  {
-    "id": 1,
-    "name": "ชาย"
-  },
-  {
-    "id": 2,
-    "name": "หญิง"
-  }
+  {"id": 1, "name": "ชาย"},
+  {"id": 2, "name": "หญิง"}
 ];
+
 

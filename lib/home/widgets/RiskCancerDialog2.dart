@@ -115,7 +115,7 @@ class RiskCancerDialog2 extends StatelessWidget {
         CupertinoDialogAction(
           onPressed: pressYes,
           child: Text(
-            'ลงทะเบียน',
+            'รับทราบ',
             style: TextStyle(
               fontFamily: 'Prompt',
             ),

@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thaicancerfree/constants.dart';
@@ -34,6 +35,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
 
   List<Evaluation> evaluations = [];
   List<Estimates> estimates = [];
+  bool checkOpendialog = false;
 
   @override
   void initState() {
@@ -53,7 +55,7 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
           evaluations = _evaluations;
           for (var i = 0; i < _evaluations.length; i++) {
             selectedOption1.add(selectedQuestion1);
-            cerrentQuestion1.add(selectedQuestion1[2]);            
+            cerrentQuestion1.add(selectedQuestion1[2]);
           }
         });
       }
@@ -88,6 +90,47 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
       }
     }
   }
+
+  void checkNoInternet() {
+    if (connectionStatus[0] == ConnectivityResult.none) {
+      if (checkOpendialog == false) {
+        setState(() {
+          checkOpendialog = true;
+        });
+        if (isPhone(context)) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => SuccessDialog(
+              title: 'ไม่ได้เชื่อมต่ออินเทอร์เน็ต',
+              pressYes: () {
+                setState(() {
+                  checkOpendialog = false;
+                });
+                Navigator.pop(context, true);
+              },
+            ),
+          );
+        } else {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => SuccessDialogTablet1(
+              page: 0,
+              title: 'คุณไม่ได้เชื่อมต่ออินเทอร์เน็ต',
+              pressYes: () {
+                setState(() {
+                  checkOpendialog = false;
+                });
+                Navigator.pop(context, true);
+              },
+            ),
+          );
+        }
+      } else {}
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -235,57 +278,125 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            final sumQuestion3 = cerrentQuestion1.where((element) => [2].contains(element)).toList();
-                            //final sumQuestion4 = cerrentQuestion2.where((element) => [2].contains(element)).toList();
-                            if (sumQuestion3.length == evaluations.length) {
-                              if (isPhone(context)) {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (context) => SuccessDialog(
-                                    title: 'คุณยังไม่ได้ทำแบบประเมิน',
-                                    pressYes: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  ),
-                                );
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (context) => SuccessDialogTablet1(
-                                    page: 0,
-                                    title: 'คุณยังไม่ได้ทำแบบประเมิน',
-                                    pressYes: () {
-                                      Navigator.pop(context, true);
-                                    },
-                                  ),
-                                );
-                              }
+                            if (connectionStatus[0] == ConnectivityResult.none) {
+                              checkNoInternet();
                             } else {
-                              if (isPhone(context)) {
-                                try {
-                                  LoadingDialog.open(context);
-                                  List<Evaluation> evaluations1 = [];
-                                  List<Evaluation> evaluations2 = [];
-                                  setState(() {
-                                    estimates.clear();
-                                    for (var i = 0; i < evaluations.length; i++) {
-                                      final _estimates = Estimates(evaluations[i].id, evaluations[i].selected == 0 ? "T" : "F");
-                                      estimates.add(_estimates);
-                                    }
-                                    for (var i = 0; i < evaluations.length; i++) {
-                                      if (evaluations[i].No == 1 || evaluations[i].No == 2 || evaluations[i].No == 3 || evaluations[i].No == 4 || evaluations[i].No == 5) {
-                                        evaluations1.add(evaluations[i]);
-                                      } else {
-                                        evaluations2.add(evaluations[i]);
+                              final sumQuestion3 = cerrentQuestion1.where((element) => [2].contains(element)).toList();
+                              //final sumQuestion4 = cerrentQuestion2.where((element) => [2].contains(element)).toList();
+                              if (sumQuestion3.length == evaluations.length) {
+                                if (isPhone(context)) {
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) => SuccessDialog(
+                                      title: 'คุณยังไม่ได้ทำแบบประเมิน',
+                                      pressYes: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) => SuccessDialogTablet1(
+                                      page: 0,
+                                      title: 'คุณยังไม่ได้ทำแบบประเมิน',
+                                      pressYes: () {
+                                        Navigator.pop(context, true);
+                                      },
+                                    ),
+                                  );
+                                }
+                              } else {
+                                if (isPhone(context)) {
+                                  try {
+                                    LoadingDialog.open(context);
+                                    List<Evaluation> evaluations1 = [];
+                                    List<Evaluation> evaluations2 = [];
+                                    setState(() {
+                                      estimates.clear();
+                                      for (var i = 0; i < evaluations.length; i++) {
+                                        final _estimates = Estimates(evaluations[i].id, evaluations[i].selected == 0 ? "T" : "F");
+                                        estimates.add(_estimates);
                                       }
-                                    }
-                                  });
-                                  final sumQuestion1 = evaluations1.where((element) => [0].contains(element.selected) || [1].contains(element.selected)).toList();
-                                  final sumQuestion2 = evaluations2.where((element) => [0].contains(element.selected) || [1].contains(element.selected)).toList();
-                                  if (sumQuestion1.isNotEmpty && sumQuestion2.isNotEmpty) {
-                                    if (sumQuestion1.length < 5 || sumQuestion2.length < 9) {
+                                      for (var i = 0; i < evaluations.length; i++) {
+                                        if (evaluations[i].No == 1 || evaluations[i].No == 2 || evaluations[i].No == 3 || evaluations[i].No == 4 || evaluations[i].No == 5) {
+                                          evaluations1.add(evaluations[i]);
+                                        } else {
+                                          evaluations2.add(evaluations[i]);
+                                        }
+                                      }
+                                    });
+                                    final sumQuestion1 = evaluations1.where((element) => [0].contains(element.selected) || [1].contains(element.selected)).toList();
+                                    final sumQuestion2 = evaluations2.where((element) => [0].contains(element.selected) || [1].contains(element.selected)).toList();
+                                    if (sumQuestion1.isNotEmpty && sumQuestion2.isNotEmpty) {
+                                      if (sumQuestion1.length < 5 || sumQuestion2.length < 9) {
+                                        LoadingDialog.close(context);
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (context) => SuccessDialog(
+                                            title: 'คุณทำแบบประเมินไม่ครบ',
+                                            pressYes: () {
+                                              Navigator.pop(context, true);
+                                            },
+                                          ),
+                                        );
+                                      } else {
+                                        //inspect(estimates);
+                                        final _takeAssessment = await HomeApi.takeAssessment(estimates: estimates);
+                                        LoadingDialog.close(context);
+                                        if (_takeAssessment != null) {
+                                          final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                                          final SharedPreferences prefs = await _prefs;
+                                          await prefs.setString('code', _takeAssessment["code"]);
+                                          // final ok2 = await showDialog(
+                                          //   context: context,
+                                          //   barrierDismissible: false,
+                                          //   builder: (context) => SuccessDialog(
+                                          //     title: '$_takeAssessment',
+                                          //     pressYes: () {
+                                          //       Navigator.pop(context, true);
+                                          //     },
+                                          //   ),
+                                          // );
+                                          final ok2 = await showDialog(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (context) => NewScessDialog(
+                                              title: 'ทำแบบประเมินสำเร็จ',
+                                              pressYes: () async {
+                                                Navigator.pop(context, true);
+                                              },
+                                            ),
+                                          );
+                                          if (ok2 == true) {
+                                            List<Evaluation> evaluations1 = [];
+                                            List<Evaluation> evaluations2 = [];
+                                            setState(() {
+                                              for (var i = 0; i < evaluations.length; i++) {
+                                                if (evaluations[i].No == 1 || evaluations[i].No == 2 || evaluations[i].No == 3 || evaluations[i].No == 4 || evaluations[i].No == 5) {
+                                                  evaluations1.add(evaluations[i]);
+                                                } else {
+                                                  evaluations2.add(evaluations[i]);
+                                                }
+                                              }
+                                            });
+                                            final sumQuestion1 = evaluations1.where((element) => [0].contains(element.selected)).toList();
+                                            final sumQuestion2 = evaluations2.where((element) => [0].contains(element.selected)).toList();
+
+                                            if (sumQuestion1.isNotEmpty || sumQuestion2.length > 1) {
+                                              //inspect(evaluations1);
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HighRisk()));
+                                            } else {
+                                              //inspect(evaluations2);
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => LowRisk()));
+                                            }
+                                          }
+                                        } else {}
+                                      }
+                                    } else {
                                       LoadingDialog.close(context);
                                       showDialog(
                                         context: context,
@@ -296,111 +407,114 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                             Navigator.pop(context, true);
                                           },
                                         ),
-                                      );                                      
-                                    } else {
-                                      //inspect(estimates);
-                                      final _takeAssessment = await HomeApi.takeAssessment(estimates: estimates);
-                                      LoadingDialog.close(context);
-                                      if (_takeAssessment != null) {
-                                        final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-                                        final SharedPreferences prefs = await _prefs;
-                                        await prefs.setString('code', _takeAssessment["code"]);
-                                        // final ok2 = await showDialog(
-                                        //   context: context,
-                                        //   barrierDismissible: false,
-                                        //   builder: (context) => SuccessDialog(
-                                        //     title: '$_takeAssessment',
-                                        //     pressYes: () {
-                                        //       Navigator.pop(context, true);
-                                        //     },
-                                        //   ),
-                                        // );
-                                        final ok2 = await showDialog(
-                                          context: context,
-                                          barrierDismissible: false,
-                                          builder: (context) => NewScessDialog(
-                                            title: 'ทำแบบประเมินสำเร็จ',
-                                            pressYes: () async {
-                                              Navigator.pop(context, true);
-                                            },
-                                          ),
-                                        );
-                                        if (ok2 == true) {
-                                          List<Evaluation> evaluations1 = [];
-                                          List<Evaluation> evaluations2 = [];
-                                          setState(() {
-                                            for (var i = 0; i < evaluations.length; i++) {
-                                              if (evaluations[i].No == 1 || evaluations[i].No == 2 || evaluations[i].No == 3 || evaluations[i].No == 4 || evaluations[i].No == 5) {
-                                                evaluations1.add(evaluations[i]);
-                                              } else {
-                                                evaluations2.add(evaluations[i]);
-                                              }
-                                            }
-                                          });
-                                          final sumQuestion1 = evaluations1.where((element) => [0].contains(element.selected)).toList();
-                                          final sumQuestion2 = evaluations2.where((element) => [0].contains(element.selected)).toList();
-
-                                          if (sumQuestion1.isNotEmpty || sumQuestion2.length > 1) {
-                                            //inspect(evaluations1);
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HighRisk()));
-                                          } else {
-                                            //inspect(evaluations2);
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => LowRisk()));
-                                          }
-                                        }
-                                      } else {}
+                                      );
                                     }
-                                  } else {
+                                  } on Exception catch (e) {
+                                    if (!mounted) return;
                                     LoadingDialog.close(context);
                                     showDialog(
                                       context: context,
                                       barrierDismissible: false,
                                       builder: (context) => SuccessDialog(
-                                        title: 'คุณทำแบบประเมินไม่ครบ',
+                                        title: '${e.getMessage}',
                                         pressYes: () {
                                           Navigator.pop(context, true);
                                         },
                                       ),
                                     );
                                   }
-                                } on Exception catch (e) {
-                                  if (!mounted) return;
-                                  LoadingDialog.close(context);
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (context) => SuccessDialog(
-                                      title: '${e.getMessage}',
-                                      pressYes: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    ),
-                                  );
-                                }
-                              } else {
-                                try {
-                                  LoadingDialog.open(context);
-                                  List<Evaluation> evaluations1 = [];
-                                  List<Evaluation> evaluations2 = [];
-                                  setState(() {
-                                    estimates.clear();
-                                    for (var i = 0; i < evaluations.length; i++) {
-                                      final _estimates = Estimates(evaluations[i].id, evaluations[i].selected == 0 ? "T" : "F");
-                                      estimates.add(_estimates);
-                                    }
-                                    for (var i = 0; i < evaluations.length; i++) {
-                                      if (evaluations[i].No == 1 || evaluations[i].No == 2 || evaluations[i].No == 3 || evaluations[i].No == 4 || evaluations[i].No == 5) {
-                                        evaluations1.add(evaluations[i]);
-                                      } else {
-                                        evaluations2.add(evaluations[i]);
+                                } else {
+                                  try {
+                                    LoadingDialog.open(context);
+                                    List<Evaluation> evaluations1 = [];
+                                    List<Evaluation> evaluations2 = [];
+                                    setState(() {
+                                      estimates.clear();
+                                      for (var i = 0; i < evaluations.length; i++) {
+                                        final _estimates = Estimates(evaluations[i].id, evaluations[i].selected == 0 ? "T" : "F");
+                                        estimates.add(_estimates);
                                       }
-                                    }
-                                  });
-                                  final sumQuestion1 = evaluations1.where((element) => [0].contains(element.selected) || [1].contains(element.selected)).toList();
-                                  final sumQuestion2 = evaluations2.where((element) => [0].contains(element.selected) || [1].contains(element.selected)).toList();
+                                      for (var i = 0; i < evaluations.length; i++) {
+                                        if (evaluations[i].No == 1 || evaluations[i].No == 2 || evaluations[i].No == 3 || evaluations[i].No == 4 || evaluations[i].No == 5) {
+                                          evaluations1.add(evaluations[i]);
+                                        } else {
+                                          evaluations2.add(evaluations[i]);
+                                        }
+                                      }
+                                    });
+                                    final sumQuestion1 = evaluations1.where((element) => [0].contains(element.selected) || [1].contains(element.selected)).toList();
+                                    final sumQuestion2 = evaluations2.where((element) => [0].contains(element.selected) || [1].contains(element.selected)).toList();
 
-                                  if (sumQuestion1.isNotEmpty && sumQuestion2.isNotEmpty) {
-                                    if (sumQuestion2.length < 9 || sumQuestion1.length < 5) {
+                                    if (sumQuestion1.isNotEmpty && sumQuestion2.isNotEmpty) {
+                                      if (sumQuestion2.length < 9 || sumQuestion1.length < 5) {
+                                        LoadingDialog.close(context);
+                                        showDialog(
+                                          context: context,
+                                          barrierDismissible: false,
+                                          builder: (context) => SuccessDialogTablet1(
+                                            page: 0,
+                                            title: 'คุณทำแบบประเมินไม่ครบ',
+                                            pressYes: () {
+                                              Navigator.pop(context, true);
+                                            },
+                                          ),
+                                        );
+                                      } else {
+                                        //inspect(estimates);
+                                        final _takeAssessment = await HomeApi.takeAssessment(estimates: estimates);
+                                        LoadingDialog.close(context);
+
+                                        if (_takeAssessment != null) {
+                                          final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                                          final SharedPreferences prefs = await _prefs;
+                                          await prefs.setString('code', _takeAssessment["code"]);
+                                          // final ok2 = await showDialog(
+                                          //   context: context,
+                                          //   barrierDismissible: false,
+                                          //   builder: (context) => SuccessDialogTablet(
+                                          //     page: 0,
+                                          //     title: 'ดำเนินการสำเร็จ',
+                                          //     pressYes: () {
+                                          //       Navigator.pop(context, true);
+                                          //     },
+                                          //   ),
+                                          // );
+                                          final ok2 = await showDialog(
+                                            context: context,
+                                            barrierDismissible: false,
+                                            builder: (context) => NewScessDialog(
+                                              title: 'ทำแบบประเมินสำเร็จ',
+                                              pressYes: () async {
+                                                Navigator.pop(context, true);
+                                              },
+                                            ),
+                                          );
+                                          if (ok2 == true) {
+                                            List<Evaluation> evaluations1 = [];
+                                            List<Evaluation> evaluations2 = [];
+                                            setState(() {
+                                              for (var i = 0; i < evaluations.length; i++) {
+                                                if (evaluations[i].No == 1 || evaluations[i].No == 2 || evaluations[i].No == 3 || evaluations[i].No == 4 || evaluations[i].No == 5) {
+                                                  evaluations1.add(evaluations[i]);
+                                                } else {
+                                                  evaluations2.add(evaluations[i]);
+                                                }
+                                              }
+                                            });
+                                            final sumQuestion1 = evaluations1.where((element) => [0].contains(element.selected)).toList();
+                                            final sumQuestion2 = evaluations2.where((element) => [0].contains(element.selected)).toList();
+
+                                            if (sumQuestion1.isNotEmpty || sumQuestion2.length > 1) {
+                                              //inspect(evaluations1);
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => HighRisk()));
+                                            } else {
+                                              //inspect(evaluations2);
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => LowRisk()));
+                                            }
+                                          }
+                                        } else {}
+                                      }
+                                    } else {
                                       LoadingDialog.close(context);
                                       showDialog(
                                         context: context,
@@ -413,97 +527,30 @@ class _RiskBreastCancerState extends State<RiskBreastCancer> {
                                           },
                                         ),
                                       );
-                                    } else {
-                                      //inspect(estimates);
-                                      final _takeAssessment = await HomeApi.takeAssessment(estimates: estimates);
-                                      LoadingDialog.close(context);
-
-                                      if (_takeAssessment != null) {
-                                        final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-                                        final SharedPreferences prefs = await _prefs;
-                                        await prefs.setString('code', _takeAssessment["code"]);
-                                        // final ok2 = await showDialog(
-                                        //   context: context,
-                                        //   barrierDismissible: false,
-                                        //   builder: (context) => SuccessDialogTablet(
-                                        //     page: 0,
-                                        //     title: 'ดำเนินการสำเร็จ',
-                                        //     pressYes: () {
-                                        //       Navigator.pop(context, true);
-                                        //     },
-                                        //   ),
-                                        // );
-                                        final ok2 = await showDialog(
-                                          context: context,
-                                          barrierDismissible: false,
-                                          builder: (context) => NewScessDialog(
-                                            title: 'ทำแบบประเมินสำเร็จ',
-                                            pressYes: () async {
-                                              Navigator.pop(context, true);
-                                            },
-                                          ),
-                                        );
-                                        if (ok2 == true) {
-                                          List<Evaluation> evaluations1 = [];
-                                          List<Evaluation> evaluations2 = [];
-                                          setState(() {
-                                            for (var i = 0; i < evaluations.length; i++) {
-                                              if (evaluations[i].No == 1 || evaluations[i].No == 2 || evaluations[i].No == 3 || evaluations[i].No == 4 || evaluations[i].No == 5) {
-                                                evaluations1.add(evaluations[i]);
-                                              } else {
-                                                evaluations2.add(evaluations[i]);
-                                              }
-                                            }
-                                          });
-                                          final sumQuestion1 = evaluations1.where((element) => [0].contains(element.selected)).toList();
-                                          final sumQuestion2 = evaluations2.where((element) => [0].contains(element.selected)).toList();
-
-                                          if (sumQuestion1.isNotEmpty || sumQuestion2.length > 1) {
-                                            //inspect(evaluations1);
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => HighRisk()));
-                                          } else {
-                                            //inspect(evaluations2);
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => LowRisk()));
+                                      if (sumQuestion1.isNotEmpty) {
+                                        for (var i = 0; i < evaluations.length; i++) {
+                                          if (evaluations[i].selected == 2) {
+                                            print(evaluations[i].selected);
+                                            break;
                                           }
                                         }
-                                      } else {}
+                                      }
                                     }
-                                  } else {
+                                  } on Exception catch (e) {
+                                    if (!mounted) return;
                                     LoadingDialog.close(context);
                                     showDialog(
                                       context: context,
                                       barrierDismissible: false,
-                                      builder: (context) => SuccessDialogTablet1(
+                                      builder: (context) => SuccessDialogTablet(
                                         page: 0,
-                                        title: 'คุณทำแบบประเมินไม่ครบ',
+                                        title: '${e.getMessage}',
                                         pressYes: () {
                                           Navigator.pop(context, true);
                                         },
                                       ),
                                     );
-                                    if (sumQuestion1.isNotEmpty) {
-                                      for (var i = 0; i < evaluations.length; i++) {
-                                        if (evaluations[i].selected == 2) {
-                                          print(evaluations[i].selected);
-                                          break;
-                                        }
-                                      }
-                                    }
                                   }
-                                } on Exception catch (e) {
-                                  if (!mounted) return;
-                                  LoadingDialog.close(context);
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (context) => SuccessDialogTablet(
-                                      page: 0,
-                                      title: '${e.getMessage}',
-                                      pressYes: () {
-                                        Navigator.pop(context, true);
-                                      },
-                                    ),
-                                  );
                                 }
                               }
                             }

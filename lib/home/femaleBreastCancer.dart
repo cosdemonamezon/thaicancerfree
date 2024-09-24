@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -57,6 +58,7 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
   List<Hospital> hospitals = [];
 
   final _formKey = GlobalKey<FormState>();
+  bool checkOpendialog = false;
 
   @override
   void initState() {
@@ -110,6 +112,46 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
           ),
         );
       }
+    }
+  }
+
+  void checkNoInternet() {
+    if (connectionStatus[0] == ConnectivityResult.none) {
+      if (checkOpendialog == false) {
+        setState(() {
+          checkOpendialog = true;
+        });
+        if (isPhone(context)) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => SuccessDialog(
+              title: 'ไม่ได้เชื่อมต่ออินเทอร์เน็ต',
+              pressYes: () {
+                setState(() {
+                  checkOpendialog = false;
+                });
+                Navigator.pop(context, true);
+              },
+            ),
+          );
+        } else {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => SuccessDialogTablet1(
+              page: 0,
+              title: 'คุณไม่ได้เชื่อมต่ออินเทอร์เน็ต',
+              pressYes: () {
+                setState(() {
+                  checkOpendialog = false;
+                });
+                Navigator.pop(context, true);
+              },
+            ),
+          );
+        }
+      } else {}
     }
   }
 
@@ -896,345 +938,349 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
             ),
             GestureDetector(
               onTap: () async {
-                if (isPhone(context)) {
-                  // if (ok2 == true) {
-                  //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                  // }
-                  try {
-                    LoadingDialog.open(context);
-                    if (selectedProvince != null && selectedDistrict != null && selectedHospitals != null) {
-                      final SharedPreferences prefs = await SharedPreferences.getInstance();
-                      final code = prefs.getString('code');
-                      if (code != null) {
-                        final _member = await HomeApi.addMembers(
-                            fname: widget.fname,
-                            lname: widget.lname,
-                            idcard: widget.idcard,
-                            email: widget.email,
-                            phone: widget.phone,
-                            address: widget.address,
-                            khet_id: selectedDistrict!.id.toString(),
-                            province_id: selectedProvince!.id.toString(),
-                            hospital_id: selectedHospitals!.id.toString(),
-                            sex: widget.sex,
-                            birthday: widget.age,
-                            code: code);
-                        if (!mounted) return;
-                        LoadingDialog.close(context);
-                        if (_member != null) {
-                          // final ok2 = await showDialog(
-                          //   context: context,
-                          //   barrierDismissible: false,
-                          //   builder: (context) => SuccessDialog(
-                          //     title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
-                          //     pressYes: () {
-                          //       Navigator.pop(context, true);
-                          //     },
-                          //   ),
-                          // );
-                          final ok2 = await showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (context) => NewScessDialog(
-                              title: 'ลงทะเบียนสำเร็จแล้ว',
-                              pressYes: () async {
-                                Navigator.pop(context, true);
-                              },
-                            ),
-                          );
-                          if (ok2 == true) {
-                            final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-                            SharedPreferences prefs = await _prefs;
-                            prefs = await SharedPreferences.getInstance();
-                            //await prefs.clear();
-                            await prefs.remove('code');
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                          }
-                        } else {}
-                      } else {
-                        final _member = await HomeApi.addMembers(
-                            fname: widget.fname,
-                            lname: widget.lname,
-                            idcard: widget.idcard,
-                            email: widget.email,
-                            phone: widget.phone,
-                            address: widget.address,
-                            khet_id: selectedDistrict!.id.toString(),
-                            province_id: selectedProvince!.id.toString(),
-                            hospital_id: selectedHospitals!.id.toString(),
-                            sex: widget.sex,
-                            birthday: widget.age,
-                            code: "");
-                        if (!mounted) return;
-                        LoadingDialog.close(context);
-                        if (_member != null) {
-                          // final ok2 = await showDialog(
-                          //   context: context,
-                          //   barrierDismissible: false,
-                          //   builder: (context) => SuccessDialog(
-                          //     title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
-                          //     pressYes: () {
-                          //       Navigator.pop(context, true);
-                          //     },
-                          //   ),
-                          // );
-                          final ok2 = await showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (context) => NewScessDialog(
-                              title: 'ลงทะเบียนสำเร็จแล้ว',
-                              pressYes: () async {
-                                Navigator.pop(context, true);
-                              },
-                            ),
-                          );
-                          if (ok2 == true) {
-                            final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-                            SharedPreferences prefs = await _prefs;
-                            prefs = await SharedPreferences.getInstance();
-                            //await prefs.clear();
-                            await prefs.remove('code');
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                          }
-                        } else {}
-                      }
-                    } else {
-                      if (!mounted) return;
-                      LoadingDialog.close(context);
-                      if (selectedProvince == null) {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => SuccessDialog(
-                            title: 'ไม่ได้เลือก จังหวัด',
-                            pressYes: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                      } else if (selectedDistrict == null) {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => SuccessDialog(
-                            title: 'ไม่ได้เลือก เขต',
-                            pressYes: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                      } else {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => SuccessDialog(
-                            title: 'ไม่ได้เลือก โรงพยาบาล',
-                            pressYes: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                      }
-                    }
-                  } on Exception catch (e) {
-                    if (!mounted) return;
-                    LoadingDialog.close(context);
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => SuccessDialog(
-                        title: '${e}',
-                        pressYes: () {
-                          Navigator.pop(context, true);
-                        },
-                      ),
-                    );
-                  }
+                if (connectionStatus[0] == ConnectivityResult.none) {
+                  checkNoInternet();
                 } else {
-                  // final ok2 = await showDialog(
-                  //   context: context,
-                  //   barrierDismissible: false,
-                  //   builder: (context) => SuccessDialogTablet(
-                  //     page: 1,
-                  //     title: 'บันทึกข้อมูลสำเร็จ โปรดเลือก รพ. ในขั้นตอนถัดไป',
-                  //     pressYes: () {
-                  //       Navigator.pop(context, true);
-                  //     },
-                  //   ),
-                  // );
-                  // if (ok2 == true) {
-                  //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                  // }
-                  try {
-                    LoadingDialog.open(context);
-                    if (selectedProvince != null && selectedDistrict != null && selectedHospitals != null) {
-                      final SharedPreferences prefs = await SharedPreferences.getInstance();
-                      final code = prefs.getString('code');
-                      if (code != null) {
-                        final _member = await HomeApi.addMembers(
-                            fname: widget.fname,
-                            lname: widget.lname,
-                            idcard: widget.idcard,
-                            email: widget.email,
-                            phone: widget.phone,
-                            address: widget.address,
-                            khet_id: selectedDistrict!.id.toString(),
-                            province_id: selectedProvince!.id.toString(),
-                            hospital_id: selectedHospitals!.id.toString(),
-                            sex: widget.sex,
-                            birthday: widget.age,
-                            code: code);
-                        if (!mounted) return;
-                        LoadingDialog.close(context);
-                        // final ok2 = await showDialog(
-                        //   context: context,
-                        //   barrierDismissible: false,
-                        //   builder: (context) => NewScessDialog(
-                        //     title: 'ลงทะเบียนสำเร็จแล้ว',
-                        //     pressYes: () async {
-                        //       Navigator.pop(context, true);
-                        //     },
-                        //   ),
-                        // );
-                        if (_member != null) {
-                          final ok2 = await showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (context) => NewScessDialog(
-                              title: 'ลงทะเบียนสำเร็จแล้ว',
-                              pressYes: () async {
-                                Navigator.pop(context, true);
-                              },
-                            ),
-                          );
-                          if (ok2 == true) {
-                            final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-                            SharedPreferences prefs = await _prefs;
-                            prefs = await SharedPreferences.getInstance();
-                            //await prefs.clear();
-                            await prefs.remove('code');
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                          }
-                        } else {}
+                  if (isPhone(context)) {
+                    // if (ok2 == true) {
+                    //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                    // }
+                    try {
+                      LoadingDialog.open(context);
+                      if (selectedProvince != null && selectedDistrict != null && selectedHospitals != null) {
+                        final SharedPreferences prefs = await SharedPreferences.getInstance();
+                        final code = prefs.getString('code');
+                        if (code != null) {
+                          final _member = await HomeApi.addMembers(
+                              fname: widget.fname,
+                              lname: widget.lname,
+                              idcard: widget.idcard,
+                              email: widget.email,
+                              phone: widget.phone,
+                              address: widget.address,
+                              khet_id: selectedDistrict!.id.toString(),
+                              province_id: selectedProvince!.id.toString(),
+                              hospital_id: selectedHospitals!.id.toString(),
+                              sex: widget.sex,
+                              birthday: widget.age,
+                              code: code);
+                          if (!mounted) return;
+                          LoadingDialog.close(context);
+                          if (_member != null) {
+                            // final ok2 = await showDialog(
+                            //   context: context,
+                            //   barrierDismissible: false,
+                            //   builder: (context) => SuccessDialog(
+                            //     title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                            //     pressYes: () {
+                            //       Navigator.pop(context, true);
+                            //     },
+                            //   ),
+                            // );
+                            final ok2 = await showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) => NewScessDialog(
+                                title: 'ลงทะเบียนสำเร็จแล้ว',
+                                pressYes: () async {
+                                  Navigator.pop(context, true);
+                                },
+                              ),
+                            );
+                            if (ok2 == true) {
+                              final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                              SharedPreferences prefs = await _prefs;
+                              prefs = await SharedPreferences.getInstance();
+                              //await prefs.clear();
+                              await prefs.remove('code');
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                            }
+                          } else {}
+                        } else {
+                          final _member = await HomeApi.addMembers(
+                              fname: widget.fname,
+                              lname: widget.lname,
+                              idcard: widget.idcard,
+                              email: widget.email,
+                              phone: widget.phone,
+                              address: widget.address,
+                              khet_id: selectedDistrict!.id.toString(),
+                              province_id: selectedProvince!.id.toString(),
+                              hospital_id: selectedHospitals!.id.toString(),
+                              sex: widget.sex,
+                              birthday: widget.age,
+                              code: "");
+                          if (!mounted) return;
+                          LoadingDialog.close(context);
+                          if (_member != null) {
+                            // final ok2 = await showDialog(
+                            //   context: context,
+                            //   barrierDismissible: false,
+                            //   builder: (context) => SuccessDialog(
+                            //     title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                            //     pressYes: () {
+                            //       Navigator.pop(context, true);
+                            //     },
+                            //   ),
+                            // );
+                            final ok2 = await showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) => NewScessDialog(
+                                title: 'ลงทะเบียนสำเร็จแล้ว',
+                                pressYes: () async {
+                                  Navigator.pop(context, true);
+                                },
+                              ),
+                            );
+                            if (ok2 == true) {
+                              final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                              SharedPreferences prefs = await _prefs;
+                              prefs = await SharedPreferences.getInstance();
+                              //await prefs.clear();
+                              await prefs.remove('code');
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                            }
+                          } else {}
+                        }
                       } else {
-                        final _member = await HomeApi.addMembers(
-                            fname: widget.fname,
-                            lname: widget.lname,
-                            idcard: widget.idcard,
-                            email: widget.email,
-                            phone: widget.phone,
-                            address: widget.address,
-                            khet_id: selectedDistrict!.id.toString(),
-                            province_id: selectedProvince!.id.toString(),
-                            hospital_id: selectedHospitals!.id.toString(),
-                            sex: widget.sex,
-                            birthday: widget.age,
-                            code: "");
                         if (!mounted) return;
                         LoadingDialog.close(context);
-                        // final ok2 = await showDialog(
-                        //   context: context,
-                        //   barrierDismissible: false,
-                        //   builder: (context) => NewScessDialog(
-                        //     title: 'ลงทะเบียนสำเร็จแล้ว',
-                        //     pressYes: () async {
-                        //       Navigator.pop(context, true);
-                        //     },
-                        //   ),
-                        // );
-                        if (_member != null) {
-                          final ok2 = await showDialog(
+                        if (selectedProvince == null) {
+                          showDialog(
                             context: context,
                             barrierDismissible: false,
-                            builder: (context) => NewScessDialog(
-                              title: 'ลงทะเบียนสำเร็จแล้ว',
-                              pressYes: () async {
+                            builder: (context) => SuccessDialog(
+                              title: 'ไม่ได้เลือก จังหวัด',
+                              pressYes: () {
                                 Navigator.pop(context, true);
                               },
                             ),
                           );
-                          if (ok2 == true) {
-                            final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-                            SharedPreferences prefs = await _prefs;
-                            prefs = await SharedPreferences.getInstance();
-                            //await prefs.clear();
-                            await prefs.remove('code');
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                          }
-                        } else {}
+                        } else if (selectedDistrict == null) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => SuccessDialog(
+                              title: 'ไม่ได้เลือก เขต',
+                              pressYes: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                        } else {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => SuccessDialog(
+                              title: 'ไม่ได้เลือก โรงพยาบาล',
+                              pressYes: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                        }
                       }
-                    } else {
+                    } on Exception catch (e) {
                       if (!mounted) return;
                       LoadingDialog.close(context);
-                      if (selectedProvince == null) {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => SuccessDialogTablet1(
-                            page: 0,
-                            title: 'ไม่ได้เลือก จังหวัด',
-                            pressYes: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                      } else if (selectedDistrict == null) {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => SuccessDialogTablet1(
-                            page: 0,
-                            title: 'ไม่ได้เลือก เขต',
-                            pressYes: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                      } else {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => SuccessDialogTablet1(
-                            page: 0,
-                            title: 'ไม่ได้เลือก โรงพยาบาล',
-                            pressYes: () {
-                              Navigator.pop(context, true);
-                            },
-                          ),
-                        );
-                      }
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => SuccessDialog(
+                          title: '${e}',
+                          pressYes: () {
+                            Navigator.pop(context, true);
+                          },
+                        ),
+                      );
                     }
+                  } else {
+                    // final ok2 = await showDialog(
+                    //   context: context,
+                    //   barrierDismissible: false,
+                    //   builder: (context) => SuccessDialogTablet(
+                    //     page: 1,
+                    //     title: 'บันทึกข้อมูลสำเร็จ โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                    //     pressYes: () {
+                    //       Navigator.pop(context, true);
+                    //     },
+                    //   ),
+                    // );
+                    // if (ok2 == true) {
+                    //   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                    // }
+                    try {
+                      LoadingDialog.open(context);
+                      if (selectedProvince != null && selectedDistrict != null && selectedHospitals != null) {
+                        final SharedPreferences prefs = await SharedPreferences.getInstance();
+                        final code = prefs.getString('code');
+                        if (code != null) {
+                          final _member = await HomeApi.addMembers(
+                              fname: widget.fname,
+                              lname: widget.lname,
+                              idcard: widget.idcard,
+                              email: widget.email,
+                              phone: widget.phone,
+                              address: widget.address,
+                              khet_id: selectedDistrict!.id.toString(),
+                              province_id: selectedProvince!.id.toString(),
+                              hospital_id: selectedHospitals!.id.toString(),
+                              sex: widget.sex,
+                              birthday: widget.age,
+                              code: code);
+                          if (!mounted) return;
+                          LoadingDialog.close(context);
+                          // final ok2 = await showDialog(
+                          //   context: context,
+                          //   barrierDismissible: false,
+                          //   builder: (context) => NewScessDialog(
+                          //     title: 'ลงทะเบียนสำเร็จแล้ว',
+                          //     pressYes: () async {
+                          //       Navigator.pop(context, true);
+                          //     },
+                          //   ),
+                          // );
+                          if (_member != null) {
+                            final ok2 = await showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) => NewScessDialog(
+                                title: 'ลงทะเบียนสำเร็จแล้ว',
+                                pressYes: () async {
+                                  Navigator.pop(context, true);
+                                },
+                              ),
+                            );
+                            if (ok2 == true) {
+                              final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                              SharedPreferences prefs = await _prefs;
+                              prefs = await SharedPreferences.getInstance();
+                              //await prefs.clear();
+                              await prefs.remove('code');
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                            }
+                          } else {}
+                        } else {
+                          final _member = await HomeApi.addMembers(
+                              fname: widget.fname,
+                              lname: widget.lname,
+                              idcard: widget.idcard,
+                              email: widget.email,
+                              phone: widget.phone,
+                              address: widget.address,
+                              khet_id: selectedDistrict!.id.toString(),
+                              province_id: selectedProvince!.id.toString(),
+                              hospital_id: selectedHospitals!.id.toString(),
+                              sex: widget.sex,
+                              birthday: widget.age,
+                              code: "");
+                          if (!mounted) return;
+                          LoadingDialog.close(context);
+                          // final ok2 = await showDialog(
+                          //   context: context,
+                          //   barrierDismissible: false,
+                          //   builder: (context) => NewScessDialog(
+                          //     title: 'ลงทะเบียนสำเร็จแล้ว',
+                          //     pressYes: () async {
+                          //       Navigator.pop(context, true);
+                          //     },
+                          //   ),
+                          // );
+                          if (_member != null) {
+                            final ok2 = await showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) => NewScessDialog(
+                                title: 'ลงทะเบียนสำเร็จแล้ว',
+                                pressYes: () async {
+                                  Navigator.pop(context, true);
+                                },
+                              ),
+                            );
+                            if (ok2 == true) {
+                              final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+                              SharedPreferences prefs = await _prefs;
+                              prefs = await SharedPreferences.getInstance();
+                              //await prefs.clear();
+                              await prefs.remove('code');
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                            }
+                          } else {}
+                        }
+                      } else {
+                        if (!mounted) return;
+                        LoadingDialog.close(context);
+                        if (selectedProvince == null) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => SuccessDialogTablet1(
+                              page: 0,
+                              title: 'ไม่ได้เลือก จังหวัด',
+                              pressYes: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                        } else if (selectedDistrict == null) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => SuccessDialogTablet1(
+                              page: 0,
+                              title: 'ไม่ได้เลือก เขต',
+                              pressYes: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                        } else {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => SuccessDialogTablet1(
+                              page: 0,
+                              title: 'ไม่ได้เลือก โรงพยาบาล',
+                              pressYes: () {
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          );
+                        }
+                      }
 
-                    // if (_member != null) {
-                    //   final ok2 = await showDialog(
-                    //     context: context,
-                    //     barrierDismissible: false,
-                    //     builder: (context) => SuccessDialogTablet(
-                    //       page: 1,
-                    //       title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
-                    //       pressYes: () {
-                    //         Navigator.pop(context, true);
-                    //       },
-                    //     ),
-                    //   );
-                    //   if (ok2 == true) {
-                    //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
-                    //   }
-                    // } else {}
-                  } on Exception catch (e) {
-                    if (!mounted) return;
-                    LoadingDialog.close(context);
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => SuccessDialogTablet(
-                        page: 0,
-                        title: '${e}',
-                        pressYes: () {
-                          Navigator.pop(context, true);
-                        },
-                      ),
-                    );
+                      // if (_member != null) {
+                      //   final ok2 = await showDialog(
+                      //     context: context,
+                      //     barrierDismissible: false,
+                      //     builder: (context) => SuccessDialogTablet(
+                      //       page: 1,
+                      //       title: '${_member} โปรดเลือก รพ. ในขั้นตอนถัดไป',
+                      //       pressYes: () {
+                      //         Navigator.pop(context, true);
+                      //       },
+                      //     ),
+                      //   );
+                      //   if (ok2 == true) {
+                      //     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => FirstPage()), (route) => false);
+                      //   }
+                      // } else {}
+                    } on Exception catch (e) {
+                      if (!mounted) return;
+                      LoadingDialog.close(context);
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => SuccessDialogTablet(
+                          page: 0,
+                          title: '${e}',
+                          pressYes: () {
+                            Navigator.pop(context, true);
+                          },
+                        ),
+                      );
+                    }
                   }
                 }
               },

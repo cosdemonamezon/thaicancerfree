@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thaicancerfree/constants.dart';
+import 'package:thaicancerfree/home/policyPage.dart';
 import 'package:thaicancerfree/home/registerPage.dart';
 import 'package:thaicancerfree/home/riskBreastCancer.dart';
 import 'package:thaicancerfree/home/widgets/NewContentWidget.dart';
@@ -25,7 +26,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<ConnectivityResult> connectionStatus = [ConnectivityResult.none];
   final Connectivity connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> connectivitySubscription;
   bool checkOpendialog = false;
@@ -320,6 +320,21 @@ class _HomePageState extends State<HomePage> {
                       }
                     }
                   },
+                ),
+              ),
+              Positioned(
+                bottom: size.height * 0.08,
+                right: size.width * 0.04,
+                left: size.width * 0.04,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => PolicyPage()));
+                  },
+                  child: Center(
+                      child: Text(
+                    'นโยบายความเป็นส่วนตัว',
+                    style: TextStyle(color: kButtonNoColor, fontWeight: FontWeight.bold, fontSize: isPhone(context) ? 18 : 25, decoration: TextDecoration.underline, decorationThickness: 2),
+                  )),
                 ),
               ),
             ],
