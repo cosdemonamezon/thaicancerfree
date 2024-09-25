@@ -338,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Positioned(
-                bottom: isPhone(context) ? size.height * 0.009 : size.height * 0.022,
+                bottom: isPhone(context) ? size.height * 0.009 : size.height * 0.009,
                 left: isPhone(context) ? size.width * 0.02 : size.height * 0.04,
                 child: Stack(
                   children: [
