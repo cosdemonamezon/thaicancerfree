@@ -121,4 +121,21 @@ class HomeApi {
       throw Exception(data['message']);
     }
   }
+
+  //เรียกดูยอดวิว
+  static Future getViews() async {
+    final url = Uri.https(publicUrl, '/thaicancel/public/api/get_views');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.get(
+      headers: headers,
+      url,
+    );
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+      return data['data'];
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
 }
