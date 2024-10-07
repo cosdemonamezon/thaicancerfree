@@ -300,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                   right: 30,
                   child: NewContentWidget(
                     size: size,
-                    title: 'ประเมินความเสี่ยงมะเร็งเต้านม\nสำหรับบุคลทั่วไป',
+                    title: 'ประเมินความเสี่ยงมะเร็งเต้านม\nสำหรับบุคคลทั่วไป',
                     press: () async {
                       if (connectionStatus[0] == ConnectivityResult.none) {
                         checkNoInternet();
