@@ -47,7 +47,7 @@ class NewContentWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       foreground: Paint()
                         ..style = PaintingStyle.stroke
-                        ..strokeWidth = 2.2
+                        ..strokeWidth = 3
                         ..color = Colors.black,
                       // shadows: [
                       //   Shadow(
@@ -68,9 +68,9 @@ class NewContentWidget extends StatelessWidget {
                       color: Colors.white,
                       shadows: [
                         Shadow(
-                          offset: Offset(1.0, 1.0), // position of the shadow
+                          offset: Offset(1.5, 1.5), // position of the shadow
                           blurRadius: 1.0, // blur effect for the shadow
-                          color: Colors.grey, // color of the shadow
+                          color: Colors.black, // color of the shadow
                         ),
                       ],
                     ),

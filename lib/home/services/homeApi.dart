@@ -4,6 +4,7 @@ import 'package:thaicancerfree/constants.dart';
 import 'package:thaicancerfree/models/district.dart';
 import 'package:thaicancerfree/models/estimates.dart';
 import 'package:thaicancerfree/models/evaluation.dart';
+import 'package:thaicancerfree/models/provinces.dart';
 
 class HomeApi {
   const HomeApi();
@@ -133,6 +134,32 @@ class HomeApi {
     if (response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
       return data['data'];
+    } else {
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
+    }
+  }
+
+  //เก็ทข้อมูลจังหวัดเพื่อเอาไปเปรียบเทียบ
+  static Future<List<Provinces>> getProvince() async {
+    final url = Uri.https(publicUrl, '/thaicancel/public/api/province_page');
+    var headers = {'Content-Type': 'application/json'};
+    final response = await http.post(
+        headers: headers,
+        url,
+        body: convert.jsonEncode({
+          "draw": 1,
+          "order": [
+            {"column": 0, "dir": "asc"}
+          ],
+          "start": 0,
+          "length": 100,
+          "search": {"value": "", "regex": false}
+        }));
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = convert.jsonDecode(response.body);
+      final list = data['data']['data'] as List;
+      return list.map((e) => Provinces.fromJson(e)).toList();
     } else {
       final data = convert.jsonDecode(response.body);
       throw Exception(data['message']);

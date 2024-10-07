@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:collection/collection.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,8 @@ class FemaleBreastCancer extends StatefulWidget {
       required this.lname,
       required this.phone,
       required this.selecteProvinces,
-      required this.sex});
+      required this.sex,
+      required this.khet_id});
 
   String fname;
   String lname;
@@ -41,6 +43,7 @@ class FemaleBreastCancer extends StatefulWidget {
   String phone;
   String address;
   String selecteProvinces;
+  int khet_id;
 
   @override
   State<FemaleBreastCancer> createState() => _FemaleBreastCancerState();
@@ -64,11 +67,15 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      getListKhets();
+      if (widget.khet_id == 0) {
+        getListKhets();
+      } else {
+        getKhetById();
+      }
     });
   }
 
-  //ดึงข้อมูล แบบประเมิน
+  //ดึงข้อมูล เขตทั้งหมด
   Future<void> getListKhets() async {
     try {
       LoadingDialog.open(context);
@@ -81,6 +88,59 @@ class _FemaleBreastCancerState extends State<FemaleBreastCancer> {
           selectedProvince = districts[0].provinces![0];
           hospitals = districts[0].provinces![0].hospitals!;
           selectedHospitals = districts[0].provinces![0].hospitals![0];
+        });
+      }
+      if (!mounted) return;
+      LoadingDialog.close(context);
+    } on Exception catch (e) {
+      if (!mounted) return;
+      LoadingDialog.close(context);
+      if (isPhone(context)) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => SuccessDialog(
+            title: '${e}',
+            pressYes: () {
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+      } else {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => SuccessDialogTablet(
+            page: 0,
+            title: '${e}',
+            pressYes: () {
+              Navigator.pop(context, true);
+            },
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> getKhetById() async {
+    try {
+      LoadingDialog.open(context);
+      final _districts = await HomeApi.getKhetById(khet_id: widget.khet_id.toString());
+      if (_districts != null) {
+        setState(() {
+          districts.add(_districts);
+          selectedDistrict = districts[0];
+          provinces = districts[0].provinces!;
+          final _selectedProvince = provinces.firstWhereOrNull((element) => element.name == widget.selecteProvinces);
+          if (_selectedProvince != null) {
+            selectedProvince = _selectedProvince;
+            hospitals = _selectedProvince.hospitals!;
+            selectedHospitals = _selectedProvince.hospitals![0];
+          } else {
+            selectedProvince = districts[0].provinces![0];
+            hospitals = districts[0].provinces![0].hospitals!;
+            selectedHospitals = districts[0].provinces![0].hospitals![0];
+          }
         });
       }
       if (!mounted) return;

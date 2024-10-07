@@ -209,7 +209,7 @@ class _HomePageState extends State<HomePage> {
               body = Text("");
             }
             return Container(
-              height: 35.0,
+              height: 55.0,
               child: Center(child: body),
             );
           },
@@ -350,7 +350,7 @@ class _HomePageState extends State<HomePage> {
                   right: 30,
                   child: NewContentWidget(
                     size: size,
-                    title: 'สำหรับหญิงไทยอายุ 40 ปีขึ้นไป\nและมีญาติสายตรงเป็นมะเร็งเต้านม',
+                    title: 'สำหรับสตรีอายุตั้งแต่ 40 ปีขึ้นไป\nและมีญาติสายตรงเป็นมะเร็งเต้านม',
                     press: () async {
                       if (connectionStatus[0] == ConnectivityResult.none) {
                         checkNoInternet();

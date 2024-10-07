@@ -1,8 +1,12 @@
+import 'dart:developer';
+
+import 'package:collection/collection.dart';
 import 'package:easy_radio/easy_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thaicancerfree/constants.dart';
 import 'package:thaicancerfree/home/femaleBreastCancer.dart';
+import 'package:thaicancerfree/home/services/homeApi.dart';
 import 'package:thaicancerfree/home/widgets/AppTextForm.dart';
 import 'package:thaicancerfree/home/widgets/AppTextFormIcons.dart';
 import 'package:thaicancerfree/models/province.dart';
@@ -33,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
   List<String> kOptions = [];
   int ageValue = 0;
 
-  int groupValue = 1;
+  int groupValue = 2;
   bool valid = true;
 
   // สร้างตัวแปรเพื่อเก็บวันที่ที่เลือก
@@ -198,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     Container(
                       width: size.width * 0.98,
-                      height: isPhone(context) ? size.height * 2.01 :size.height * 1.81,
+                      height: isPhone(context) ? size.height * 2.01 : size.height * 1.81,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(
@@ -369,33 +373,33 @@ class _RegisterPageState extends State<RegisterPage> {
                                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    EasyRadio<int>(
-                                                      value: 1,
-                                                      groupValue: groupValue,
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          groupValue = value!;
-                                                          sex.text = 'ชาย';
-                                                        });
-                                                      },
-                                                      dotStyle: DotStyle.check(StrokeCap.round),
-                                                      activeBorderColor: kContentColor4,
-                                                      inactiveBorderColor: kContentColor2,
-                                                      dotColor: kContentColor4,
-                                                      radius: 18,
-                                                      dotRadius: 15,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-                                                      child: Text(
-                                                        'ชาย',
-                                                        style: TextStyle(color: Colors.black, fontSize: isPhone(context) ? 20 : 30, fontWeight: FontWeight.bold),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                // Row(
+                                                //   children: [
+                                                //     EasyRadio<int>(
+                                                //       value: 1,
+                                                //       groupValue: groupValue,
+                                                //       onChanged: (value) {
+                                                //         setState(() {
+                                                //           groupValue = value!;
+                                                //           sex.text = 'ชาย';
+                                                //         });
+                                                //       },
+                                                //       dotStyle: DotStyle.check(StrokeCap.round),
+                                                //       activeBorderColor: kContentColor4,
+                                                //       inactiveBorderColor: kContentColor2,
+                                                //       dotColor: kContentColor4,
+                                                //       radius: 18,
+                                                //       dotRadius: 15,
+                                                //     ),
+                                                //     Padding(
+                                                //       padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                                                //       child: Text(
+                                                //         'ชาย',
+                                                //         style: TextStyle(color: Colors.black, fontSize: isPhone(context) ? 20 : 30, fontWeight: FontWeight.bold),
+                                                //       ),
+                                                //     ),
+                                                //   ],
+                                                // ),
                                                 Row(
                                                   children: [
                                                     EasyRadio<int>(
@@ -514,62 +518,65 @@ class _RegisterPageState extends State<RegisterPage> {
                                           SizedBox(
                                             width: size.width * 0.45,
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    EasyRadio<int>(
-                                                      value: 1,
-                                                      groupValue: groupValue,
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          groupValue = value!;
-                                                          sex.text = 'ชาย';
-                                                        });
-                                                      },
-                                                      dotStyle: DotStyle.check(StrokeCap.round),
-                                                      activeBorderColor: kContentColor4,
-                                                      inactiveBorderColor: kContentColor2,
-                                                      dotColor: kContentColor4,
-                                                      radius: 18,
-                                                      dotRadius: 15,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-                                                      child: Text(
-                                                        'ชาย',
-                                                        style: TextStyle(color: Colors.black, fontSize: isPhone(context) ? 20 : 30, fontWeight: FontWeight.bold),
+                                                // Row(
+                                                //   children: [
+                                                //     EasyRadio<int>(
+                                                //       value: 1,
+                                                //       groupValue: groupValue,
+                                                //       onChanged: (value) {
+                                                //         setState(() {
+                                                //           groupValue = value!;
+                                                //           sex.text = 'ชาย';
+                                                //         });
+                                                //       },
+                                                //       dotStyle: DotStyle.check(StrokeCap.round),
+                                                //       activeBorderColor: kContentColor4,
+                                                //       inactiveBorderColor: kContentColor2,
+                                                //       dotColor: kContentColor4,
+                                                //       radius: 18,
+                                                //       dotRadius: 15,
+                                                //     ),
+                                                //     Padding(
+                                                //       padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                                                //       child: Text(
+                                                //         'ชาย',
+                                                //         style: TextStyle(color: Colors.black, fontSize: isPhone(context) ? 20 : 30, fontWeight: FontWeight.bold),
+                                                //       ),
+                                                //     ),
+                                                //   ],
+                                                // ),
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
+                                                  child: Row(
+                                                    children: [
+                                                      EasyRadio<int>(
+                                                        value: 2,
+                                                        groupValue: groupValue,
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            groupValue = value!;
+                                                            sex.text = 'หญิง';
+                                                          });
+                                                        },
+                                                        dotStyle: DotStyle.check(StrokeCap.round),
+                                                        activeBorderColor: kContentColor4,
+                                                        inactiveBorderColor: kContentColor2,
+                                                        dotColor: kContentColor4,
+                                                        radius: 18,
+                                                        dotRadius: 15,
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    EasyRadio<int>(
-                                                      value: 2,
-                                                      groupValue: groupValue,
-                                                      onChanged: (value) {
-                                                        setState(() {
-                                                          groupValue = value!;
-                                                          sex.text = 'หญิง';
-                                                        });
-                                                      },
-                                                      dotStyle: DotStyle.check(StrokeCap.round),
-                                                      activeBorderColor: kContentColor4,
-                                                      inactiveBorderColor: kContentColor2,
-                                                      dotColor: kContentColor4,
-                                                      radius: 18,
-                                                      dotRadius: 15,
-                                                    ),
-                                                    Padding(
-                                                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-                                                      child: Text(
-                                                        'หญิง',
-                                                        style: TextStyle(color: Colors.black, fontSize: isPhone(context) ? 20 : 30, fontWeight: FontWeight.bold),
+                                                      Padding(
+                                                        padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                                                        child: Text(
+                                                          'หญิง',
+                                                          style: TextStyle(color: Colors.black, fontSize: isPhone(context) ? 20 : 30, fontWeight: FontWeight.bold),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -714,7 +721,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     })
                                 : SizedBox(),
                             SizedBox(
-                              height: isPhone(context) ? size.height * 0.04 :size.height * 0.08,
+                              height: isPhone(context) ? size.height * 0.04 : size.height * 0.08,
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -729,38 +736,81 @@ class _RegisterPageState extends State<RegisterPage> {
                                       setState(() {
                                         valid = true;
                                       });
-                                      if (isPhone(context)) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => FemaleBreastCancer(
-                                                      fname: fname.text,
-                                                      lname: lname.text,
-                                                      sex: sex.text,
-                                                      address: address.text,
-                                                      phone: phone.text,
-                                                      age: age.text,
-                                                      email: email.text,
-                                                      idcard: idcard.text,
-                                                      selecteProvinces: provin.text,
-                                                    )));
-                                      } else {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => FemaleBreastCancer(
-                                                      fname: fname.text,
-                                                      lname: lname.text,
-                                                      sex: sex.text,
-                                                      address: address.text,
-                                                      phone: phone.text,
-                                                      age: age.text,
-                                                      email: email.text,
-                                                      idcard: idcard.text,
-                                                      selecteProvinces: selecteProvinces!.name,
-                                                    )));
+                                      final _province = await HomeApi.getProvince();
+                                      if (_province.isNotEmpty) {
+                                        final _newProvince = _province.firstWhereOrNull((element) => element.name == provin.text);
+                                        //inspect(_newProvince);
+                                        if (_newProvince == null) {
+                                          if (isPhone(context)) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => FemaleBreastCancer(
+                                                          fname: fname.text,
+                                                          lname: lname.text,
+                                                          sex: sex.text,
+                                                          address: address.text,
+                                                          phone: phone.text,
+                                                          age: age.text,
+                                                          email: email.text,
+                                                          idcard: idcard.text,
+                                                          selecteProvinces: provin.text,
+                                                          khet_id: 0,
+                                                        )));
+                                          } else {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => FemaleBreastCancer(
+                                                          fname: fname.text,
+                                                          lname: lname.text,
+                                                          sex: sex.text,
+                                                          address: address.text,
+                                                          phone: phone.text,
+                                                          age: age.text,
+                                                          email: email.text,
+                                                          idcard: idcard.text,
+                                                          selecteProvinces: provin.text,
+                                                          khet_id: 0,
+                                                        )));
+                                          }
+                                        } else {
+                                          if (isPhone(context)) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => FemaleBreastCancer(
+                                                          fname: fname.text,
+                                                          lname: lname.text,
+                                                          sex: sex.text,
+                                                          address: address.text,
+                                                          phone: phone.text,
+                                                          age: age.text,
+                                                          email: email.text,
+                                                          idcard: idcard.text,
+                                                          selecteProvinces: provin.text,
+                                                          khet_id: int.parse(_newProvince.khet_id),
+                                                        )));
+                                          } else {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => FemaleBreastCancer(
+                                                          fname: fname.text,
+                                                          lname: lname.text,
+                                                          sex: sex.text,
+                                                          address: address.text,
+                                                          phone: phone.text,
+                                                          age: age.text,
+                                                          email: email.text,
+                                                          idcard: idcard.text,
+                                                          selecteProvinces: provin.text,
+                                                          khet_id: int.parse(_newProvince.khet_id),
+                                                        )));
+                                          }
+                                        }
                                       }
-                                    }else{
+                                    } else {
                                       setState(() {
                                         valid = false;
                                       });
@@ -853,7 +903,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ),
-                   //SizedBox(height: size.height * 0.16),
+                    //SizedBox(height: size.height * 0.16),
                   ],
                 ),
               ),

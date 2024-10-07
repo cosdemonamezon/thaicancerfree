@@ -730,35 +730,35 @@ class _RegisterPageState extends State<RegisterPage> {
                                         valid = true;
                                       });
                                       if (isPhone(context)) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => FemaleBreastCancer(
-                                                      fname: fname.text,
-                                                      lname: lname.text,
-                                                      sex: sex.text,
-                                                      address: address.text,
-                                                      phone: phone.text,
-                                                      age: age.text,
-                                                      email: email.text,
-                                                      idcard: idcard.text,
-                                                      selecteProvinces: provin.text,
-                                                    )));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) => FemaleBreastCancer(
+                                        //               fname: fname.text,
+                                        //               lname: lname.text,
+                                        //               sex: sex.text,
+                                        //               address: address.text,
+                                        //               phone: phone.text,
+                                        //               age: age.text,
+                                        //               email: email.text,
+                                        //               idcard: idcard.text,
+                                        //               selecteProvinces: provin.text,
+                                        //             )));
                                       } else {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => FemaleBreastCancer(
-                                                      fname: fname.text,
-                                                      lname: lname.text,
-                                                      sex: sex.text,
-                                                      address: address.text,
-                                                      phone: phone.text,
-                                                      age: age.text,
-                                                      email: email.text,
-                                                      idcard: idcard.text,
-                                                      selecteProvinces: selecteProvinces!.name,
-                                                    )));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) => FemaleBreastCancer(
+                                        //               fname: fname.text,
+                                        //               lname: lname.text,
+                                        //               sex: sex.text,
+                                        //               address: address.text,
+                                        //               phone: phone.text,
+                                        //               age: age.text,
+                                        //               email: email.text,
+                                        //               idcard: idcard.text,
+                                        //               selecteProvinces: selecteProvinces!.name,
+                                        //             )));
                                       }
                                     }else{
                                       setState(() {
